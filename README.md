@@ -35,6 +35,16 @@ Opening `index.html` directly also works in most browsers.
 2. Go to **Settings → Pages → Source: GitHub Actions**.
 3. The workflow in `.github/workflows/pages.yml` deploys on every push to `main`.
 
+## Install as an app
+
+The app is a PWA, but installing only works over **HTTPS** (for example your GitHub Pages link), not from a downloaded file.
+
+- **Android / Chrome:** open the live link → menu (⋮) → **Install app**
+- **iPhone / Safari:** Share → **Add to Home Screen**
+- **Desktop Chrome / Edge:** install icon in the address bar
+
+If you installed it earlier and still see a letter instead of the icon, remove the old shortcut and install again.
+
 ## Network dependencies
 
 | Used for | Source |
