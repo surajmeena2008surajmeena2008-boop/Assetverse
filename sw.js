@@ -1,7 +1,7 @@
 // AssetVerse service worker: makes the app installable.
 // The app itself still needs the network for libraries and icon data.
-const CACHE = 'assetverse-v1';
-const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'assets/icon-192.png', 'assets/icon-512.png', 'assets/favicon.svg'];
+const CACHE = 'assetverse-v2';
+const SHELL = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'favicon.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

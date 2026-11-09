@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon.svg" width="120" alt="AssetVerse icon">
+  <img src="icon.svg" width="120" alt="AssetVerse icon">
 </p>
 
 <h1 align="center">AssetVerse</h1>
@@ -31,9 +31,9 @@ Opening `index.html` directly also works in most browsers.
 
 ## Deploy on GitHub Pages
 
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages → Source: GitHub Actions**.
-3. The workflow in `.github/workflows/pages.yml` deploys on every push to `main`.
+1. Upload all files to a GitHub repo (all files sit in the repo root, no folders).
+2. Go to **Settings → Pages → Source: Deploy from a branch → `main` / `(root)`**.
+3. Open `https://USERNAME.github.io/REPO/` after a minute.
 
 ## Install as an app
 
@@ -42,6 +42,8 @@ The app is a PWA, but installing only works over **HTTPS** (for example your Git
 - **Android / Chrome:** open the live link → menu (⋮) → **Install app**
 - **iPhone / Safari:** Share → **Add to Home Screen**
 - **Desktop Chrome / Edge:** install icon in the address bar
+
+Not working? Open `install-check.html` on your live link (e.g. `https://USERNAME.github.io/REPO/install-check.html`). It shows exactly what is missing.
 
 If you installed it earlier and still see a letter instead of the icon, remove the old shortcut and install again.
 

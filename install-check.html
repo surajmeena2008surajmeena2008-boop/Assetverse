@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AssetVerse install check</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body{margin:0;font:15px/1.5 system-ui,sans-serif;background:#0a0e1f;color:#eef2ff;padding:20px;max-width:640px;margin-inline:auto}
+h1{font-size:20px;margin:0 0 4px}p.s{color:#9aa6d6;margin:0 0 16px}
+.row{display:flex;gap:10px;align-items:flex-start;background:#161b33;border-radius:12px;padding:10px 12px;margin:8px 0;word-break:break-word}
+.dot{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:#0a0e1f}
+.ok{background:#34d399}.bad{background:#f87171}.wait{background:#fbbf24}
+img{width:40px;height:40px;border-radius:8px;background:#222;flex:none}
+small{color:#9aa6d6;display:block}
+button{margin-top:12px;padding:12px 18px;border:0;border-radius:999px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;font:600 15px system-ui;display:none}
+</style></head><body>
+<h1>AssetVerse install check</h1>
+<p class="s">Open this page from your live <b>https://</b> link. Green = fine, red = fix needed.</p>
+<div id="out"></div><button id="inst">Install app now</button>
+<script>
+var out=document.getElementById('out');
+function row(state,title,note,img){var d=document.createElement('div');d.className='row';
+ d.innerHTML=(img?'<img src="'+img+'" alt="">':'')+'<span class="dot '+state+'">'+(state=='ok'?'\u2713':state=='bad'?'!':'?')+'</span><div><b>'+title+'</b>'+(note?'<small>'+note+'</small>':'')+'</div>';
+ out.appendChild(d);return d}
+var https=location.protocol==='https:'||location.hostname==='localhost';
+row(https?'ok':'bad','Opened over HTTPS',https?location.origin:'You opened this as '+location.protocol+'// . Installing only works from an https:// link (e.g. GitHub Pages), not from a local file.');
+row('wait','Page address',location.href);
+(async function(){
+ var m;
+ try{var r=await fetch('manifest.json',{cache:'no-store'});
+  if(!r.ok)throw new Error('HTTP '+r.status);m=await r.json();
+  row('ok','manifest.json found','name: '+m.name+' \u2022 display: '+m.display);
+ }catch(e){row('bad','manifest.json NOT found',String(e)+' \u2014 the file is missing from your deployed site (wrong folder or old deploy).');return}
+ for(var i=0;i<m.icons.length;i++){(function(ic){
+  var url=new URL(ic.src,location.href).href;
+  var im=new Image();
+  im.onload=function(){row('ok','Icon '+ic.sizes+' ('+ic.purpose+') loads',ic.src,url)};
+  im.onerror=function(){row('bad','Icon '+ic.sizes+' FAILED to load',url+' \u2014 file missing or wrong path.')};
+  im.src=url})(m.icons[i])}
+ if('serviceWorker' in navigator){
+  try{var reg=await navigator.serviceWorker.getRegistration();
+   if(!reg){await navigator.serviceWorker.register('sw.js');reg=await navigator.serviceWorker.getRegistration()}
+   row(reg?'ok':'bad','Service worker',reg?'scope: '+reg.scope:'not registered')}
+  catch(e){row('bad','Service worker failed',String(e))}
+ }else row('bad','Service worker not supported in this browser');
+ var sa=matchMedia('(display-mode: standalone)').matches;
+ row(sa?'ok':'wait','Running as installed app',sa?'Yes, installed':'No (normal browser tab)');
+ var w=row('wait','Browser install prompt','Waiting\u2026 if this stays yellow, the browser does not consider the app installable yet, or it is already installed.');
+ addEventListener('beforeinstallprompt',function(e){e.preventDefault();
+  w.querySelector('.dot').className='dot ok';w.querySelector('.dot').textContent='\u2713';
+  w.querySelector('small').textContent='Browser says: installable!';
+  var b=document.getElementById('inst');b.style.display='inline-block';b.onclick=function(){e.prompt()}});
+})();
+</script></body></html>

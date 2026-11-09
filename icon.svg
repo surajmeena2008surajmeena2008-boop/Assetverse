@@ -1,28 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>AssetVerse</title>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7c5cff"/><stop offset="0.55" stop-color="#4f7bff"/><stop offset="1" stop-color="#22d3ee"/>
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="0.55" stop-color="#4f7bff"/>
+      <stop offset="1" stop-color="#22d3ee"/>
     </linearGradient>
-    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient id="sparkle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#fb923c"/>
     </linearGradient>
-    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#fb923c"/>
-    </linearGradient>
-    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0a0e1f" flood-opacity=".35"/>
-    </filter>
   </defs>
-  <rect width="512" height="512" rx="116" fill="url(#bg)"/>
-  <rect width="512" height="256" rx="116" fill="url(#gloss)"/>
-  <g filter="url(#sh)">
-    <!-- circle -->
-    <circle cx="178" cy="178" r="68" fill="#fff"/>
-    <!-- rounded square -->
-    <rect x="278" y="110" width="136" height="136" rx="36" fill="#fff" fill-opacity=".92"/>
-    <!-- triangle -->
-    <path d="M178 274 L252 402 H104 Z" fill="#fff" fill-opacity=".92" stroke="#fff" stroke-width="22" stroke-linejoin="round"/>
-    <!-- sparkle star -->
-    <path d="M346 270 C352 328 366 342 424 348 C366 354 352 368 346 426 C340 368 326 354 268 348 C326 342 340 328 346 270 Z" fill="url(#pink)"/>
-  </g>
+  <rect width="512" height="512" rx="116" ry="116" fill="url(#bg)"/>
+  <circle cx="178" cy="178" r="68" fill="#ffffff"/>
+  <rect x="278" y="110" width="136" height="136" rx="36" ry="36" fill="#f1f4fb"/>
+  <path d="M178 274 L252 402 L104 402 Z" fill="#f1f4fb" stroke="#f1f4fb" stroke-width="22" stroke-linejoin="round"/>
+  <path d="M346 270 C352 328 366 342 424 348 C366 354 352 368 346 426 C340 368 326 354 268 348 C326 342 340 328 346 270 Z" fill="url(#sparkle)"/>
 </svg>
