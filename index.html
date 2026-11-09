@@ -1,0 +1,4437 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AssetVerse – Every Icon, Logo, Sticker, Emoji, Symbol &amp; Font Studio</title>
+    <meta name="description" content="Browse, customise (colour, texture, size) and export every icon, brand logo, sticker, emoji, symbol and font as SVG or PNG. Glass, neumorphic, clay &amp; more themes.">
+    <meta name="theme-color" content="#0a0e1f">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <meta property="og:title" content="AssetVerse">
+    <meta property="og:description" content="Browse, customise and export every icon, logo, sticker, emoji, symbol and font as SVG or PNG.">
+    <meta property="og:image" content="assets/social-preview.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Nunito:wght@400;600;700;800&amp;family=Fredoka:wght@400;500;600;700&amp;family=Bungee&amp;family=Orbitron:wght@500;700;900&amp;family=Rajdhani:wght@500;600;700&amp;family=Righteous&amp;family=DM+Sans:wght@400;500;700&amp;family=Syne:wght@500;700;800&amp;display=swap" rel="stylesheet">
+  <script type="importmap">{"imports":{"react":"https://esm.sh/react@19.2.6","react-dom/client":"https://esm.sh/react-dom@19.2.6/client?external=react","react/jsx-runtime":"https://esm.sh/react@19.2.6/jsx-runtime","framer-motion":"https://esm.sh/framer-motion@^14.10.1?external=react,react-dom","lucide":"https://esm.sh/lucide@^1.70.0?external=react,react-dom","simple-icons":"https://esm.sh/simple-icons@13","react-dom":"https://esm.sh/react-dom@19.2.6?external=react"}}</script><script>window.process=window.process||{env:{NODE_ENV:'production'}};window.addEventListener('error',function(ev){var r=document.getElementById('root');if(r&&(!r.children.length||document.getElementById('boot')))r.textContent='App error: '+ev.message})</script><script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.17"></script><style type="text/tailwindcss">
+
+
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+
+/* ============ THEME TOKENS ============ */
+.app-root, .theme-scope {
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --dw: 800;
+  --blur: 0px;
+  --sat: 100%;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+  --btn-hover: translateY(-2px);
+  --btn-active-transform: translateY(0);
+  --text-shadow: none;
+  --deco: none;
+}
+.app-root {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.app-root::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--deco);
+}
+.app-root > * { position: relative; z-index: 1; }
+.theme-scope { color: var(--fg); font-family: var(--font-body); background: var(--bg); }
+
+/* ---- Glassmorphism ---- */
+[data-theme='glass'] {
+  --bg: #0a0e1f; --fg: #eef2ff; --muted: rgba(226,232,255,.62);
+  --accent: linear-gradient(135deg,#7c5cff,#22d3ee); --accent-solid: #8b7bff; --on-accent: #fff;
+  --surface: rgba(255,255,255,.07); --border: 1px solid rgba(255,255,255,.17);
+  --shadow: 0 10px 40px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.25);
+  --blur: 24px; --sat: 160%;
+  --inset-bg: rgba(0,0,0,.25); --inset-shadow: inset 0 2px 8px rgba(0,0,0,.35); --inset-border: 1px solid rgba(255,255,255,.1);
+  --btn-bg: rgba(255,255,255,.1); --btn-fg: #eef2ff; --btn-border: 1px solid rgba(255,255,255,.2); --btn-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+  --btn-active-shadow: inset 0 2px 8px rgba(0,0,0,.35);
+  --plate: rgba(255,255,255,.93); --plate-ink: #1f2937;
+  --font-display: 'Space Grotesk', sans-serif;
+  --deco: radial-gradient(40vw 40vw at 10% 10%, rgba(124,92,255,.55), transparent 60%), radial-gradient(45vw 45vw at 90% 20%, rgba(34,211,238,.4), transparent 60%), radial-gradient(40vw 40vw at 60% 95%, rgba(244,114,182,.4), transparent 60%);
+}
+/* ---- Liquid glass ---- */
+[data-theme='liquid'] {
+  --bg: linear-gradient(135deg,#dbeafe 0%,#fae8ff 50%,#cffafe 100%); --fg: #1e293b; --muted: #64748b;
+  --accent: linear-gradient(135deg,#3b82f6,#a855f7); --accent-solid: #6366f1; --on-accent: #fff;
+  --surface: rgba(255,255,255,.42); --border: 1px solid rgba(255,255,255,.85);
+  --shadow: 0 12px 36px rgba(80,100,190,.2), inset 0 2px 2px rgba(255,255,255,.95), inset 0 -3px 8px rgba(255,255,255,.45);
+  --blur: 30px; --sat: 190%; --radius: 28px; --radius-sm: 18px;
+  --inset-bg: rgba(255,255,255,.4); --inset-shadow: inset 0 2px 6px rgba(80,100,190,.18); --inset-border: 1px solid rgba(255,255,255,.7);
+  --btn-bg: rgba(255,255,255,.55); --btn-fg: #1e293b; --btn-border: 1px solid rgba(255,255,255,.9); --btn-shadow: 0 4px 14px rgba(80,100,190,.15), inset 0 1px 2px #fff;
+  --btn-active-shadow: inset 0 2px 6px rgba(80,100,190,.25);
+  --plate: rgba(255,255,255,.85); --plate-ink: #1e293b;
+  --font-display: 'Space Grotesk', sans-serif;
+  --deco: radial-gradient(30vw 30vw at 15% 20%, rgba(96,165,250,.55), transparent 65%), radial-gradient(35vw 35vw at 85% 30%, rgba(240,171,252,.6), transparent 65%), radial-gradient(30vw 30vw at 50% 90%, rgba(94,234,212,.5), transparent 65%);
+}
+/* ---- Neumorphism ---- */
+[data-theme='neu'] {
+  --bg: #e0e5ec; --fg: #3d4852; --muted: #7b8794;
+  --accent: linear-gradient(145deg,#7a6cff,#5a4ee0); --accent-solid: #6d5dfc; --on-accent: #fff;
+  --surface: #e0e5ec; --border: 0 solid transparent;
+  --shadow: 9px 9px 18px #a3b1c6, -9px -9px 18px #ffffff;
+  --radius: 22px; --radius-sm: 14px;
+  --inset-bg: #e0e5ec; --inset-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff; --inset-border: 0 solid transparent;
+  --btn-bg: #e0e5ec; --btn-fg: #3d4852; --btn-border: 0 solid transparent; --btn-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px #ffffff;
+  --btn-active-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff; --btn-hover: translateY(0);
+  --plate: #eef1f6; --plate-ink: #334155;
+  --font-display: 'Nunito', sans-serif;
+}
+[data-theme='neudark'] {
+  --bg: #2b2f3a; --fg: #e5e9f2; --muted: #98a2b3;
+  --accent: linear-gradient(145deg,#8b7bff,#5b4de0); --accent-solid: #8b7bff; --on-accent: #fff;
+  --surface: #2b2f3a; --border: 0 solid transparent;
+  --shadow: 9px 9px 18px #1c1f27, -9px -9px 18px #3a3f4d;
+  --radius: 22px; --radius-sm: 14px;
+  --inset-bg: #2b2f3a; --inset-shadow: inset 5px 5px 10px #1c1f27, inset -5px -5px 10px #3a3f4d; --inset-border: 0 solid transparent;
+  --btn-bg: #2b2f3a; --btn-fg: #e5e9f2; --btn-border: 0 solid transparent; --btn-shadow: 6px 6px 12px #1c1f27, -6px -6px 12px #3a3f4d;
+  --btn-active-shadow: inset 4px 4px 8px #1c1f27, inset -4px -4px 8px #3a3f4d; --btn-hover: translateY(0);
+  --plate: #e8ecf4; --plate-ink: #1f2937;
+  --font-display: 'Nunito', sans-serif;
+}
+/* ---- Claymorphism ---- */
+[data-theme='clay'] {
+  --bg: linear-gradient(160deg,#ffe3ef 0%,#e5f0ff 55%,#fff1d6 100%); --fg: #4b3560; --muted: #8d779f;
+  --accent: linear-gradient(145deg,#ff8fc0,#ff6fa8); --accent-solid: #ff6fa8; --on-accent: #fff;
+  --surface: linear-gradient(145deg,#fff8fc,#ffeaf4); --border: 0 solid transparent;
+  --shadow: 14px 14px 30px rgba(214,120,170,.32), -8px -8px 22px rgba(255,255,255,.95), inset -8px -8px 16px rgba(214,120,170,.22), inset 8px 8px 16px rgba(255,255,255,.95);
+  --radius: 34px; --radius-sm: 22px;
+  --inset-bg: #fdeaf3; --inset-shadow: inset 6px 6px 12px rgba(214,120,170,.3), inset -6px -6px 12px rgba(255,255,255,.95); --inset-border: 0 solid transparent;
+  --btn-bg: linear-gradient(145deg,#ffffff,#ffe4f0); --btn-fg: #4b3560; --btn-border: 0 solid transparent;
+  --btn-shadow: 8px 8px 18px rgba(214,120,170,.3), -5px -5px 14px rgba(255,255,255,.95), inset -4px -4px 8px rgba(214,120,170,.18), inset 4px 4px 8px rgba(255,255,255,.95);
+  --btn-active-shadow: inset 5px 5px 10px rgba(214,120,170,.35), inset -4px -4px 8px rgba(255,255,255,.9); --btn-hover: translateY(-3px) scale(1.02);
+  --plate: #fffafd; --plate-ink: #4b3560; --radius-pill: 999px;
+  --font-body: 'Nunito', sans-serif; --font-display: 'Fredoka', sans-serif; --dw: 700;
+  --deco: radial-gradient(18vw 18vw at 8% 15%, rgba(255,160,200,.35), transparent 70%), radial-gradient(22vw 22vw at 92% 70%, rgba(150,200,255,.4), transparent 70%);
+}
+/* ---- Maximalism ---- */
+[data-theme='maxi'] {
+  --bg: #fff04d; --fg: #1a0033; --muted: #5b2a86;
+  --accent: linear-gradient(90deg,#ff2e93,#ff8a00); --accent-solid: #ff2e93; --on-accent: #fff;
+  --surface: #ffffff; --border: 3px solid #1a0033;
+  --shadow: 6px 6px 0 #ff2e93, 12px 12px 0 #00d4ff, 18px 18px 0 #1a0033;
+  --radius: 22px; --radius-sm: 14px;
+  --inset-bg: #fff8b8; --inset-shadow: inset 3px 3px 0 rgba(26,0,51,.25); --inset-border: 3px solid #1a0033;
+  --btn-bg: #00e5a8; --btn-fg: #1a0033; --btn-border: 3px solid #1a0033; --btn-shadow: 4px 4px 0 #1a0033;
+  --btn-active-shadow: 0 0 0 #1a0033; --btn-hover: translate(-2px,-2px); --btn-active-transform: translate(4px,4px);
+  --plate: #fff; --plate-ink: #1a0033;
+  --font-body: 'Space Grotesk', sans-serif; --font-display: 'Bungee', sans-serif; --dw: 400;
+  --text-shadow: 3px 3px 0 #ff2e93;
+  --deco: radial-gradient(circle at 12% 18%, #ff2e93 0 8vw, transparent 8.2vw), radial-gradient(circle at 88% 12%, #00d4ff 0 6vw, transparent 6.2vw), radial-gradient(circle at 80% 85%, #7c3aed 0 10vw, transparent 10.2vw), radial-gradient(circle at 10% 90%, #00e5a8 0 7vw, transparent 7.2vw), repeating-linear-gradient(45deg, rgba(26,0,51,.07) 0 10px, transparent 10px 20px);
+}
+/* ---- Neubrutalism ---- */
+[data-theme='brutal'] {
+  --bg: #fff8e1; --fg: #000; --muted: #444;
+  --accent: #ffde59; --accent-solid: #000; --on-accent: #000;
+  --surface: #ffffff; --border: 3px solid #000; --shadow: 7px 7px 0 #000;
+  --radius: 10px; --radius-sm: 8px;
+  --inset-bg: #fff; --inset-shadow: 3px 3px 0 #000 inset; --inset-border: 3px solid #000;
+  --btn-bg: #fff; --btn-fg: #000; --btn-border: 3px solid #000; --btn-shadow: 4px 4px 0 #000;
+  --btn-active-shadow: 0 0 0 #000; --btn-hover: translate(-2px,-2px); --btn-active-transform: translate(4px,4px);
+  --plate: #fff; --plate-ink: #000;
+  --font-body: 'Space Grotesk', sans-serif; --font-display: 'Space Grotesk', sans-serif; --dw: 800;
+  --deco: radial-gradient(#00000022 1.5px, transparent 1.5px); 
+}
+  .app-root[data-theme='brutal']::before { background-size: 22px 22px; }
+/* ---- Aurora ---- */
+[data-theme='aurora'] {
+  --bg: #050816; --fg: #f1f5ff; --muted: rgba(203,213,255,.6);
+  --accent: linear-gradient(120deg,#34d399,#38bdf8,#8b5cf6); --accent-solid: #38bdf8; --on-accent: #04101f;
+  --surface: rgba(15,23,42,.55); --border: 1px solid rgba(148,163,255,.18);
+  --shadow: 0 20px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03) inset;
+  --blur: 18px; --radius: 20px; --radius-sm: 12px;
+  --inset-bg: rgba(2,6,23,.55); --inset-shadow: inset 0 2px 6px rgba(0,0,0,.5); --inset-border: 1px solid rgba(148,163,255,.14);
+  --btn-bg: rgba(148,163,255,.1); --btn-fg: #f1f5ff; --btn-border: 1px solid rgba(148,163,255,.25); --btn-shadow: none;
+  --btn-active-shadow: inset 0 2px 6px rgba(0,0,0,.5);
+  --plate: #f3f6ff; --plate-ink: #111827;
+  --font-display: 'Syne', sans-serif;
+  --deco: radial-gradient(60vw 35vw at 20% 0%, rgba(52,211,153,.35), transparent 70%), radial-gradient(55vw 40vw at 85% 10%, rgba(139,92,246,.4), transparent 70%), radial-gradient(60vw 30vw at 50% 100%, rgba(56,189,248,.28), transparent 70%);
+}
+/* ---- Cyberpunk ---- */
+[data-theme='cyber'] {
+  --bg: #07070f; --fg: #e0f7ff; --muted: #6fb7c9;
+  --accent: linear-gradient(90deg,#00f0ff,#ff00aa); --accent-solid: #00f0ff; --on-accent: #05050a;
+  --surface: rgba(10,12,30,.82); --border: 1px solid rgba(0,240,255,.7);
+  --shadow: 0 0 18px rgba(0,240,255,.3), inset 0 0 22px rgba(0,240,255,.07);
+  --blur: 6px; --radius: 4px; --radius-sm: 3px; --radius-pill: 4px;
+  --inset-bg: rgba(0,0,0,.5); --inset-shadow: inset 0 0 10px rgba(0,240,255,.2); --inset-border: 1px solid rgba(0,240,255,.4);
+  --btn-bg: rgba(0,240,255,.07); --btn-fg: #00f0ff; --btn-border: 1px solid #00f0ff; --btn-shadow: 0 0 10px rgba(0,240,255,.35);
+  --btn-active-shadow: 0 0 22px rgba(255,0,170,.7), inset 0 0 10px rgba(255,0,170,.4);
+  --plate: #e8fbff; --plate-ink: #0a1020;
+  --font-body: 'Rajdhani', sans-serif; --font-display: 'Orbitron', sans-serif; --dw: 800;
+  --text-shadow: 0 0 14px rgba(0,240,255,.7);
+  --deco: linear-gradient(rgba(0,240,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,.08) 1px, transparent 1px), radial-gradient(50vw 30vw at 80% 0%, rgba(255,0,170,.22), transparent 70%), radial-gradient(50vw 30vw at 0% 100%, rgba(0,240,255,.2), transparent 70%);
+}
+/* ---- Skeuomorphism ---- */
+[data-theme='skeuo'] {
+  --bg: repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, rgba(0,0,0,.03) 1px 3px), linear-gradient(180deg,#d9dce1,#b9bec6); --fg: #2b2f36; --muted: #5d6572;
+  --accent: linear-gradient(180deg,#6db6ff 0%,#2f80ed 50%,#1a62c9 51%,#3c8df0 100%); --accent-solid: #2f80ed; --on-accent: #fff;
+  --surface: linear-gradient(180deg,#fafbfc,#dfe2e7); --border: 1px solid #8f959e;
+  --shadow: inset 0 1px 0 #fff, 0 10px 22px rgba(0,0,0,.28), 0 1px 0 rgba(0,0,0,.45);
+  --radius: 16px; --radius-sm: 10px;
+  --inset-bg: linear-gradient(180deg,#c9ced6,#e4e7ec); --inset-shadow: inset 0 3px 6px rgba(0,0,0,.35), 0 1px 0 #fff; --inset-border: 1px solid #858b95;
+  --btn-bg: linear-gradient(180deg,#ffffff,#d5d9df); --btn-fg: #2b2f36; --btn-border: 1px solid #7e848d; --btn-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,.3);
+  --btn-active-shadow: inset 0 3px 6px rgba(0,0,0,.4); --btn-hover: translateY(-1px);
+  --plate: #fff; --plate-ink: #2b2f36; --text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  --font-display: 'DM Sans', sans-serif;
+}
+/* ---- Retro Y2K ---- */
+[data-theme='retro'] {
+  --bg: linear-gradient(180deg,#c4b5fd 0%,#fbcfe8 55%,#fde68a 100%); --fg: #2e1065; --muted: #6d4a9e;
+  --accent: linear-gradient(180deg,#fda4af,#fb7185 50%,#e11d74 51%,#fb7185); --accent-solid: #e11d74; --on-accent: #fff;
+  --surface: linear-gradient(180deg,#ffffff,#ede9fe); --border: 2px solid #fff;
+  --shadow: 0 0 0 2px #8b5cf6, 6px 6px 0 #8b5cf6, inset 0 -6px 12px rgba(139,92,246,.18);
+  --radius: 20px; --radius-sm: 12px;
+  --inset-bg: #f5f3ff; --inset-shadow: inset 0 0 0 2px #a78bfa; --inset-border: 0 solid transparent;
+  --btn-bg: linear-gradient(180deg,#fff,#ddd6fe 50%,#c4b5fd 51%,#ddd6fe); --btn-fg: #2e1065; --btn-border: 2px solid #fff; --btn-shadow: 0 0 0 2px #8b5cf6, 3px 3px 0 #8b5cf6;
+  --btn-active-shadow: 0 0 0 2px #8b5cf6, 0 0 0 #8b5cf6; --btn-hover: translate(-1px,-1px); --btn-active-transform: translate(3px,3px);
+  --plate: #fff; --plate-ink: #2e1065;
+  --font-body: 'DM Sans', sans-serif; --font-display: 'Righteous', sans-serif; --dw: 400;
+  --text-shadow: 2px 2px 0 #fff, 4px 4px 0 #a78bfa;
+  --deco: radial-gradient(#ffffff99 2px, transparent 2px), radial-gradient(#a78bfa55 1.5px, transparent 1.5px);
+}
+  .app-root[data-theme='retro']::before { background-size: 38px 38px, 61px 61px; }
+/* ---- Minimal ---- */
+[data-theme='minimal'] {
+  --bg: #fafafa; --fg: #0a0a0a; --muted: #737373;
+  --accent: #0a0a0a; --accent-solid: #0a0a0a; --on-accent: #fff;
+  --surface: #fff; --border: 1px solid #e5e5e5; --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.04);
+  --radius: 14px; --radius-sm: 10px;
+  --inset-bg: #f5f5f5; --inset-shadow: none; --inset-border: 1px solid #e5e5e5;
+  --btn-bg: #fff; --btn-fg: #0a0a0a; --btn-border: 1px solid #e0e0e0; --btn-shadow: 0 1px 1px rgba(0,0,0,.04);
+  --btn-active-shadow: inset 0 1px 3px rgba(0,0,0,.12);
+  --plate: #f4f4f5; --plate-ink: #18181b; --dw: 700;
+}
+
+/* ============ COMPONENT CLASSES ============ */
+.card {
+  background: var(--surface); border: var(--border); box-shadow: var(--shadow); border-radius: var(--radius);
+  backdrop-filter: blur(var(--blur)) saturate(var(--sat)); -webkit-backdrop-filter: blur(var(--blur)) saturate(var(--sat));
+}
+.inset { background: var(--inset-bg); border: var(--inset-border); box-shadow: var(--inset-shadow); border-radius: var(--radius-sm); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; cursor: pointer;
+  background: var(--btn-bg); color: var(--btn-fg); border: var(--btn-border); box-shadow: var(--btn-shadow);
+  border-radius: var(--radius-sm); padding: .6rem 1rem; font-weight: 600; font-size: .875rem; line-height: 1.1;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; backdrop-filter: blur(calc(var(--blur) / 2));
+  font-family: var(--font-body); white-space: nowrap;
+}
+.btn:hover { transform: var(--btn-hover); filter: brightness(1.04); }
+.btn:active, .btn.on { box-shadow: var(--btn-active-shadow, var(--btn-shadow)); transform: var(--btn-active-transform); }
+.btn:disabled { opacity: .5; pointer-events: none; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { filter: brightness(1.1) saturate(1.1); }
+.btn-lg { padding: .95rem 1.6rem; font-size: 1rem; border-radius: var(--radius-sm); }
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  background: var(--btn-bg); color: var(--btn-fg); border: var(--btn-border); box-shadow: var(--btn-shadow);
+  border-radius: var(--radius-pill); padding: .38rem .8rem; font-size: .78rem; font-weight: 600;
+  transition: all .18s ease; font-family: var(--font-body);
+}
+.chip:hover { transform: var(--btn-hover); }
+.chip.on { background: var(--accent); color: var(--on-accent); box-shadow: var(--btn-active-shadow, var(--btn-shadow)); }
+.field {
+  width: 100%; background: var(--inset-bg); border: var(--inset-border); box-shadow: var(--inset-shadow); color: var(--fg);
+  border-radius: var(--radius-sm); padding: .65rem .9rem; font-size: .9rem; outline: none; font-family: var(--font-body);
+}
+.field::placeholder { color: var(--muted); }
+.field:focus { outline: 2px solid var(--accent-solid); outline-offset: 2px; }
+select.field option { color: #111; }
+.plate { background: var(--plate); color: var(--plate-ink); border-radius: var(--radius-sm); }
+.muted { color: var(--muted); }
+.font-display { font-family: var(--font-display); font-weight: var(--dw); letter-spacing: -.01em; }
+h1.font-display, h2.font-display { text-shadow: var(--text-shadow); }
+.accent-text { background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; }
+[data-theme='brutal'] .accent-text { background: #ffde59; color: #000; padding: 0 .15em; -webkit-background-clip: border-box; box-shadow: 4px 4px 0 #000; border: 3px solid #000; display: inline-block; transform: rotate(-1.5deg); }
+.tile {
+  background: var(--surface); border: var(--border); box-shadow: var(--btn-shadow); border-radius: var(--radius-sm);
+  transition: transform .2s ease, box-shadow .2s ease; cursor: pointer; position: relative; overflow: hidden;
+}
+.tile:hover { transform: translateY(-3px) scale(1.03); }
+.tile.sel { outline: 3px solid var(--accent-solid); outline-offset: 2px; }
+.sec-title { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+input[type='range'] { accent-color: var(--accent-solid); width: 100%; height: 22px; cursor: pointer; }
+input[type='color'] { -webkit-appearance: none; appearance: none; width: 2.1rem; height: 2.1rem; border: var(--inset-border); background: none; border-radius: 10px; padding: 0; cursor: pointer; overflow: hidden; flex-shrink: 0; }
+input[type='color']::-webkit-color-swatch-wrapper { padding: 0; }
+input[type='color']::-webkit-color-swatch { border: none; border-radius: 8px; }
+input[type='color']::-moz-color-swatch { border: none; border-radius: 8px; }
+.checker { background-color: #fff; background-image: linear-gradient(45deg,#d9dde3 25%,transparent 25%,transparent 75%,#d9dde3 75%), linear-gradient(45deg,#d9dde3 25%,transparent 25%,transparent 75%,#d9dde3 75%); background-size: 20px 20px; background-position: 0 0, 10px 10px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+.thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 8px; opacity: .5; }
+.thin-scroll { scrollbar-width: thin; scrollbar-color: var(--muted) transparent; }
+
+/* ============ ANIMATIONS ============ */
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-18px) rotate(calc(var(--r,0deg) + 4deg)); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes pulse-ring { 0% { transform: scale(.8); opacity: .6; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.floaty { animation: floaty 6s ease-in-out infinite; }
+.marquee { animation: marquee 50s linear infinite; width: max-content; }
+.marquee-rev { animation: marquee-rev 60s linear infinite; width: max-content; }
+.marquee:hover, .marquee-rev:hover { animation-play-state: paused; }
+.shimmer-text { background-size: 200% auto; animation: shimmer 5s linear infinite; }
+.pop-in { animation: pop .3s ease both; }
+@media (prefers-reduced-motion: reduce) { .floaty, .marquee, .marquee-rev, .shimmer-text { animation: none; } }
+
+</style></head>
+  <body>
+    <div id="root"><p id="boot" style="font:16px system-ui,sans-serif;padding:24px;color:#888">Loading…</p></div>
+    <script>setTimeout(function(){var b=document.getElementById("boot");if(b)b.textContent="Could not load the required libraries (React, Framer Motion, Lucide) from the network. Please check your internet connection and reload the page."},15000)</script>
+    
+  
+
+<script type="module">import * as X0 from "react";
+import * as X1 from "react-dom/client";
+import * as X2 from "react/jsx-runtime";
+import * as X3 from "framer-motion";
+import * as X4 from "lucide";
+const __e={};const mk=ns=>{const o=Object.assign({__esModule:true},ns);if(!("default" in ns))o.default=ns;return o};
+__e["react"]=mk(X0);
+__e["react-dom/client"]=mk(X1);
+__e["react/jsx-runtime"]=mk(X2);
+__e["framer-motion"]=mk(X3);
+__e["lucide"]=mk(X4);
+const __m={},__c={};
+function __r(id){if(id.startsWith("ext:"))return __e[id.slice(4)];if(__c[id])return __c[id].exports;const m=__c[id]={exports:{}};__m[id](m,m.exports);return m.exports}
+__m["src/main.tsx"]=function(module,exports){
+"use strict";
+
+var _react = __r("ext:react");
+var _client = __r("ext:react-dom/client");
+({});
+var _App = _interopRequireDefault(__r("src/App.tsx"));
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+(0, _client.createRoot)(document.getElementById("root")).render( /*#__PURE__*/(0, _jsxRuntime.jsx)(_react.StrictMode, {
+  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_App.default, {})
+}));
+};
+__m["src/App.tsx"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = App;
+var _react = __r("ext:react");
+var _Landing = _interopRequireDefault(__r("src/components/Landing.tsx"));
+var _Studio = _interopRequireDefault(__r("src/components/Studio.tsx"));
+var _themes = __r("src/lib/themes.ts");
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const readHash = () => {
+  const m = window.location.hash.match(/^#\/studio(?:\/(\w+))?/);
+  if (m) return {
+    view: 'studio',
+    tab: m[1] || 'icon'
+  };
+  return {
+    view: 'landing',
+    tab: 'icon'
+  };
+};
+function App() {
+  const [theme, setThemeState] = (0, _react.useState)(() => {
+    const t = localStorage.getItem('av-theme');
+    return _themes.THEMES.some(x => x.id === t) ? t : 'glass';
+  });
+  const [route, setRoute] = (0, _react.useState)(readHash);
+  (0, _react.useEffect)(() => {
+    const h = () => setRoute(readHash());
+    window.addEventListener('hashchange', h);
+    return () => window.removeEventListener('hashchange', h);
+  }, []);
+  const setTheme = (0, _react.useCallback)(t => {
+    setThemeState(t);
+    localStorage.setItem('av-theme', t);
+    const th = _themes.THEMES.find(x => x.id === t);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', th?.dot[0] || '#0a0e1f');
+  }, []);
+  const openStudio = (0, _react.useCallback)((tab = 'icon') => {
+    window.location.hash = `#/studio/${tab}`;
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+  const goHome = (0, _react.useCallback)(() => {
+    window.location.hash = '#/';
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: "app-root",
+    "data-theme": theme,
+    children: route.view === 'landing' ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Landing.default, {
+      theme: theme,
+      setTheme: setTheme,
+      openStudio: openStudio
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_Studio.default, {
+      tab: route.tab,
+      setTab: t => openStudio(t),
+      theme: theme,
+      setTheme: setTheme,
+      onHome: goHome
+    })
+  });
+}
+};
+__m["src/components/Landing.tsx"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Landing;
+var _react = __r("ext:react");
+var _framerMotion = __r("ext:framer-motion");
+var _lucide = __r("ext:lucide");
+var _data = __r("src/lib/data.ts");
+var _render = __r("src/lib/render.ts");
+var _themes = __r("src/lib/themes.ts");
+var _ui = __r("src/components/ui.tsx");
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+/* ---------- demo assets (no network needed) ---------- */
+const GH = 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12';
+const DEMO = {
+  rocket: {
+    id: 'd:rocket',
+    kind: 'emoji',
+    name: 'Rocket',
+    vb: [0, 0, 130, 130],
+    text: '🚀',
+    multi: true
+  },
+  heart: (0, _data.lucideAsset)('Heart', _lucide.Heart),
+  github: {
+    id: 'd:gh',
+    kind: 'logo',
+    name: 'GitHub',
+    vb: [0, 0, 24, 24],
+    body: `<path d="${GH}" fill="currentColor"/>`,
+    mono: true,
+    color: '#181717'
+  },
+  star: (0, _data.lucideAsset)('Star', _lucide.Star),
+  zap: (0, _data.lucideAsset)('Zap', _lucide.Zap),
+  badge: (0, _data.makeBadges)()[0],
+  rocketIcon: (0, _data.lucideAsset)('Rocket', _lucide.Rocket)
+};
+const S = p => ({
+  ..._render.DEFAULT_STYLE,
+  ...p
+});
+const SHOWCASE = [{
+  a: DEMO.rocket,
+  st: S({
+    outlineW: 18,
+    shadowBlur: 8,
+    shadowY: 8,
+    rotate: -12
+  }),
+  cap: 'Die-cut sticker outline'
+}, {
+  a: DEMO.github,
+  st: S({}),
+  cap: 'Official brand colour'
+}, {
+  a: DEMO.heart,
+  st: S({
+    colorMode: 'gradient',
+    color: '#ff5ea8',
+    color2: '#ff9f43',
+    texture: 'glitter',
+    texOpacity: 0.95,
+    glow: 6,
+    glowColor: '#f0abfc',
+    strokeWidth: 2.4
+  }),
+  cap: 'Gradient + glitter + glow'
+}, {
+  a: DEMO.star,
+  st: S({
+    colorMode: 'gradient',
+    color: '#fde68a',
+    color2: '#b45309',
+    angle: 90,
+    texture: 'metal',
+    texOpacity: 0.55,
+    shadowBlur: 6,
+    shadowY: 6,
+    strokeWidth: 2.4,
+    bgShape: 'circle',
+    bgColor: '#1f1147',
+    bgPad: 20
+  }),
+  cap: 'Gold metal on a badge'
+}, {
+  a: DEMO.badge,
+  st: S({
+    hue: 150,
+    texture: 'halftone',
+    texColor: '#000',
+    texOpacity: 0.18
+  }),
+  cap: 'Hue shift + halftone'
+}, {
+  a: DEMO.zap,
+  st: S({
+    colorMode: 'solid',
+    color: '#22d3ee',
+    glow: 10,
+    bgShape: 'squircle',
+    bgColor: '#070b18',
+    bgPad: 22,
+    strokeWidth: 2.2
+  }),
+  cap: 'Neon glow app icon'
+}, {
+  a: DEMO.rocketIcon,
+  st: S({
+    colorMode: 'solid',
+    color: '#ffffff',
+    bgShape: 'squircle',
+    bgMode: 'gradient',
+    bgColor: '#7c5cff',
+    bgColor2: '#22d3ee',
+    bgPad: 22,
+    texture: 'gloss',
+    texTarget: 'bg',
+    texOpacity: 0.55,
+    shadowBlur: 10,
+    shadowY: 10,
+    strokeWidth: 2.2
+  }),
+  cap: 'Gradient app icon'
+}];
+function Svg({
+  a,
+  st,
+  uid,
+  className = ''
+}) {
+  const html = (0, _react.useMemo)(() => (0, _render.buildSvg)(a, st, {
+    uid
+  }).svg, [a, st, uid]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: `[&>svg]:w-full [&>svg]:h-full ${className}`,
+    dangerouslySetInnerHTML: {
+      __html: html
+    }
+  });
+}
+function Count({
+  to,
+  suffix = ''
+}) {
+  const ref = (0, _react.useRef)(null);
+  const inView = (0, _framerMotion.useInView)(ref, {
+    once: true
+  });
+  const [v, setV] = (0, _react.useState)(0);
+  (0, _react.useEffect)(() => {
+    if (!inView) return;
+    const c = (0, _framerMotion.animate)(0, to, {
+      duration: 2.2,
+      ease: 'easeOut',
+      onUpdate: x => setV(Math.round(x))
+    });
+    return () => c.stop();
+  }, [inView, to]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+    ref: ref,
+    children: [v.toLocaleString(), suffix]
+  });
+}
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 28
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+const stagger = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.09
+    }
+  }
+};
+const LOGO_SLUGS = ['github', 'google', 'spotify', 'netflix', 'youtube', 'instagram', 'figma', 'discord', 'slack', 'notion', 'stripe', 'airbnb', 'tesla', 'nike', 'adobe', 'twitch', 'whatsapp', 'linkedin', 'x', 'tiktok', 'shopify', 'paypal', 'vercel', 'react', 'tailwindcss', 'docker', 'firebase', 'canva', 'openai', 'telegram', 'pinterest', 'reddit', 'uber', 'samsung', 'amazon', 'snapchat', 'dropbox', 'android', 'apple', 'facebook'];
+const FLOATERS = [{
+  t: '🔥',
+  x: '47%',
+  y: '40%',
+  s: 44,
+  d: 0,
+  r: -10
+}, {
+  t: '💜',
+  x: '55%',
+  y: '86%',
+  s: 38,
+  d: 0.8,
+  r: 12
+}, {
+  t: '🎨',
+  x: '48%',
+  y: '1%',
+  s: 38,
+  d: 1.4,
+  r: 6
+}, {
+  t: '✨',
+  x: '1%',
+  y: '94%',
+  s: 36,
+  d: 0.4,
+  r: 0
+}, {
+  t: '🚀',
+  x: '96%',
+  y: '88%',
+  s: 42,
+  d: 1.1,
+  r: -14
+}, {
+  t: '😎',
+  x: '40%',
+  y: '96%',
+  s: 36,
+  d: 1.8,
+  r: 8
+}, {
+  t: '★',
+  x: '58%',
+  y: '20%',
+  s: 30,
+  d: 0.6,
+  r: 0
+}, {
+  t: '⚡',
+  x: '97%',
+  y: '4%',
+  s: 34,
+  d: 2,
+  r: 10
+}];
+const FEATURES = [{
+  i: 'globe',
+  t: 'Everything, one search',
+  d: 'Lucide, 3,400+ brand logos, 3,700+ emojis, 1,700+ Google Fonts, 10,000+ Unicode symbols — plus 200,000+ icons & stickers streamed live from Iconify.'
+}, {
+  i: 'palette',
+  t: 'Customise every pixel',
+  d: 'Solid or gradient colours, 19 textures, outlines, glow, shadows, backdrops, rotation, flip, opacity and size up to 4096px.'
+}, {
+  i: 'award',
+  t: 'True brand colours',
+  d: 'Logos open in their official colours. Switch to any tint only when you want to — hue, saturation and brightness included.'
+}, {
+  i: 'download',
+  t: 'SVG • PNG • WebP • JPG',
+  d: 'Export crisp vectors or transparent rasters at any size, or copy SVG code and PNGs straight to your clipboard.'
+}, {
+  i: 'devices',
+  t: 'Every device, every screen',
+  d: 'Fluid layouts for phones, tablets, laptops and big monitors with touch-friendly sheets and keyboard-friendly controls.'
+}, {
+  i: 'layers',
+  t: '12 morphic themes',
+  d: 'Glass, Liquid Glass, Neumorphism, Claymorphism, Maximalism, Neubrutalism, Aurora, Cyberpunk, Skeuomorphism, Y2K and more.'
+}];
+const CATS = [{
+  id: 'icon',
+  t: 'Icons',
+  d: '200k+ UI icons in every style',
+  e: '🧩'
+}, {
+  id: 'logo',
+  t: 'Logos',
+  d: 'Official brand colours',
+  e: '🏷️'
+}, {
+  id: 'sticker',
+  t: 'Stickers',
+  d: '3D, flat & die-cut packs',
+  e: '🎟️'
+}, {
+  id: 'emoji',
+  t: 'Emojis',
+  d: 'Every Unicode emoji',
+  e: '😀'
+}, {
+  id: 'symbol',
+  t: 'Symbols',
+  d: 'Arrows, math, kaomoji…',
+  e: '∞'
+}, {
+  id: 'font',
+  t: 'Fonts',
+  d: '1,700+ Google Fonts',
+  e: 'Aa'
+}, {
+  id: 'text',
+  t: 'Text styles',
+  d: '𝓯𝓪𝓷𝓬𝔂 unicode text',
+  e: '𝔸'
+}];
+function Landing({
+  theme,
+  setTheme,
+  openStudio
+}) {
+  const {
+    scrollYProgress
+  } = (0, _framerMotion.useScroll)();
+  const bar = (0, _framerMotion.useSpring)(scrollYProgress, {
+    stiffness: 120,
+    damping: 24
+  });
+  const [logos, setLogos] = (0, _react.useState)([]);
+  const [idx, setIdx] = (0, _react.useState)(0);
+  const [pgA, setPgA] = (0, _react.useState)('rocket');
+  const [pg, setPg] = (0, _react.useState)(S({
+    size: 300,
+    colorMode: 'original'
+  }));
+  const patchPg = p => setPg(s => ({
+    ...s,
+    ...p
+  }));
+  (0, _react.useEffect)(() => {
+    (0, _data.loadLogos)().then(all => {
+      const bySlug = new Map(all.map(l => [l.id.replace('si:', ''), l]));
+      setLogos(LOGO_SLUGS.map(s => bySlug.get(s)).filter(Boolean));
+    }).catch(() => undefined);
+  }, []);
+  (0, _react.useEffect)(() => {
+    const t = setInterval(() => setIdx(i => (i + 1) % SHOWCASE.length), 2800);
+    return () => clearInterval(t);
+  }, []);
+  const cur = SHOWCASE[idx];
+  const pgAsset = DEMO[pgA];
+  const pgOrig = pgAsset.kind === 'emoji' || !!pgAsset.color || pgAsset.kind === 'sticker';
+  const logoPlain = (0, _react.useMemo)(() => logos.map(l => ({
+    l,
+    svg: (0, _render.buildSvg)(l, _render.DEFAULT_STYLE, {
+      plain: true,
+      forceSize: 44,
+      uid: 'm'
+    }).svg
+  })), [logos]);
+  const row1 = logoPlain.slice(0, Math.ceil(logoPlain.length / 2));
+  const row2 = logoPlain.slice(Math.ceil(logoPlain.length / 2));
+  const LogoCard = ({
+    l,
+    svg
+  }) => /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: "card !rounded-2xl px-4 py-3 flex items-center gap-3 shrink-0 hover:scale-105 transition-transform",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: "plate w-12 h-12 p-2.5 flex items-center justify-center",
+      dangerouslySetInnerHTML: {
+        __html: svg.replace(/width="\d+" height="\d+"/, 'width="100%" height="100%"')
+      }
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: "font-semibold text-sm pr-2",
+      children: l.name
+    })]
+  });
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+      className: "fixed top-0 left-0 right-0 h-1 z-50 origin-left",
+      style: {
+        scaleX: bar,
+        background: 'var(--accent)'
+      }
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("header", {
+      className: "sticky top-0 z-40 px-3 sm:px-6 pt-3",
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "card flex items-center gap-3 px-3 sm:px-5 py-2.5",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("a", {
+          href: "#top",
+          className: "flex items-center gap-2",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Logo, {
+            size: 34
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "font-display text-lg sm:text-xl",
+            children: "AssetVerse"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("nav", {
+          className: "hidden md:flex items-center gap-1 ml-6 flex-1 text-sm font-semibold",
+          children: [['Features', '#features'], ['Library', '#library'], ['Playground', '#playground'], ['Themes', '#themes']].map(([n, h]) => /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+            href: h,
+            className: "px-3 py-2 rounded-full hover:opacity-70 transition",
+            children: n
+          }, n))
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "flex-1 md:hidden"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ThemeSwitcher, {
+          theme: theme,
+          setTheme: setTheme,
+          compact: true
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          className: "btn btn-primary",
+          onClick: () => openStudio(),
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "hidden sm:inline",
+            children: "Open\xA0"
+          }), "Studio", /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+            n: "arrow",
+            s: 16
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      id: "top",
+      className: "relative px-4 sm:px-8 pt-10 sm:pt-16 pb-20 max-w-7xl mx-auto",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "absolute inset-0 pointer-events-none hidden md:block",
+        "aria-hidden": true,
+        children: FLOATERS.map((f, i) => /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          className: "floaty absolute select-none opacity-90",
+          style: {
+            left: f.x,
+            top: f.y,
+            fontSize: f.s,
+            animationDelay: `${f.d}s`,
+            ['--r']: `${f.r}deg`
+          },
+          children: f.t
+        }, i))
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "relative grid lg:grid-cols-[1.1fr_.9fr] gap-10 lg:gap-14 items-center",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: stagger,
+          initial: "hidden",
+          animate: "show",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+            variants: fadeUp,
+            className: "chip on !cursor-default !text-xs sm:!text-[13px] !px-4 !py-2 mb-6",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: "sparkles",
+              s: 14
+            }), " 250,000+ assets \xB7 12 themes \xB7 free forever"]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.h1, {
+            variants: fadeUp,
+            className: "font-display text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl",
+            children: ["Every ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              className: "accent-text shimmer-text",
+              children: "asset"
+            }), " in the world,", /*#__PURE__*/(0, _jsxRuntime.jsx)("br", {}), "in one studio."]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.p, {
+            variants: fadeUp,
+            className: "muted text-base sm:text-lg mt-6 max-w-xl leading-relaxed",
+            children: ["Icons, logos, stickers, emojis, symbols & fonts \u2014 search, then adjust ", /*#__PURE__*/(0, _jsxRuntime.jsx)("b", {
+              style: {
+                color: 'var(--fg)'
+              },
+              children: "colour, texture and size"
+            }), " to your taste and export as SVG or PNG. Brand logos always keep their original colours."]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+            variants: fadeUp,
+            className: "flex flex-wrap gap-3 mt-8",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+              className: "btn btn-primary btn-lg",
+              onClick: () => openStudio(),
+              children: ["Start creating", /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                n: "arrow",
+                s: 18
+              })]
+            }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+              className: "btn btn-lg",
+              onClick: () => openStudio('logo'),
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                n: "award",
+                s: 18
+              }), "Browse brand logos"]
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+            variants: fadeUp,
+            className: "flex flex-wrap gap-2 mt-8",
+            children: CATS.map(c => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+              className: "chip",
+              onClick: () => openStudio(c.id),
+              children: c.t
+            }, c.id))
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          initial: {
+            opacity: 0,
+            scale: 0.9,
+            rotate: 3
+          },
+          animate: {
+            opacity: 1,
+            scale: 1,
+            rotate: 0
+          },
+          transition: {
+            duration: 0.8,
+            delay: 0.25,
+            ease: [0.22, 1, 0.36, 1]
+          },
+          className: "relative mx-auto w-full max-w-md",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "absolute -inset-6 rounded-[3rem] opacity-60 blur-3xl pointer-events-none",
+            style: {
+              background: 'var(--accent)'
+            }
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "card relative p-4 sm:p-5",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "flex items-center gap-1.5 mb-3",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "w-3 h-3 rounded-full bg-[#ff5f57]"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "w-3 h-3 rounded-full bg-[#febc2e]"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "w-3 h-3 rounded-full bg-[#28c840]"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "ml-auto text-[11px] muted font-mono",
+                children: "live preview"
+              })]
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "plate aspect-square flex items-center justify-center overflow-hidden relative",
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.AnimatePresence, {
+                mode: "wait",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+                  initial: {
+                    opacity: 0,
+                    scale: 0.6,
+                    rotate: -20
+                  },
+                  animate: {
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 0
+                  },
+                  exit: {
+                    opacity: 0,
+                    scale: 1.25,
+                    rotate: 15
+                  },
+                  transition: {
+                    type: 'spring',
+                    stiffness: 220,
+                    damping: 20
+                  },
+                  className: "w-[72%] h-[72%]",
+                  children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Svg, {
+                    a: cur.a,
+                    st: cur.st,
+                    uid: "hero"
+                  })
+                }, idx)
+              })
+            }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "flex items-center justify-between mt-4 gap-3",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.AnimatePresence, {
+                mode: "wait",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+                  initial: {
+                    opacity: 0,
+                    y: 8
+                  },
+                  animate: {
+                    opacity: 1,
+                    y: 0
+                  },
+                  exit: {
+                    opacity: 0,
+                    y: -8
+                  },
+                  className: "text-sm font-bold min-w-0 truncate",
+                  children: cur.cap
+                }, idx)
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                className: "flex gap-1.5 shrink-0",
+                children: SHOWCASE.map((_, i) => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+                  "aria-label": `Demo ${i + 1}`,
+                  onClick: () => setIdx(i),
+                  className: "h-2 rounded-full transition-all",
+                  style: {
+                    width: i === idx ? 22 : 8,
+                    background: i === idx ? 'var(--accent-solid)' : 'var(--muted)',
+                    opacity: i === idx ? 1 : 0.4
+                  }
+                }, i))
+              })]
+            }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "flex gap-2 mt-4",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+                className: "btn btn-primary flex-1 !cursor-default",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                  n: "download",
+                  s: 15
+                }), "SVG"]
+              }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+                className: "btn flex-1 !cursor-default",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                  n: "download",
+                  s: 15
+                }), "PNG"]
+              }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+                className: "btn flex-1 !cursor-default",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                  n: "copy",
+                  s: 15
+                }), "Copy"]
+              })]
+            })]
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      className: "py-6 overflow-hidden",
+      "aria-label": "Brand logos in original colours",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+        className: "text-center sec-title mb-5",
+        children: "Brand logos \u2014 always in their original colours"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "space-y-4 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "marquee flex gap-4 px-2",
+          children: [...row1, ...row1].map((x, i) => /*#__PURE__*/(0, _jsxRuntime.jsx)(LogoCard, {
+            ...x
+          }, i))
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "marquee-rev flex gap-4 px-2",
+          children: [...row2, ...row2].map((x, i) => /*#__PURE__*/(0, _jsxRuntime.jsx)(LogoCard, {
+            ...x
+          }, i))
+        })]
+      }), logos.length === 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "text-center muted text-sm py-6",
+        children: "Loading logos\u2026"
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("section", {
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto",
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+        variants: stagger,
+        initial: "hidden",
+        whileInView: "show",
+        viewport: {
+          once: true,
+          margin: '-80px'
+        },
+        className: "grid grid-cols-2 lg:grid-cols-4 gap-4",
+        children: [[250000, '+', 'icons & stickers'], [3400, '+', 'brand logos'], [3700, '+', 'emojis'], [1700, '+', 'Google fonts']].map(([n, s, l]) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: fadeUp,
+          className: "card p-5 sm:p-7 text-center",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "font-display text-3xl sm:text-5xl accent-text",
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Count, {
+              to: n,
+              suffix: s
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "muted text-sm mt-2 font-medium",
+            children: l
+          })]
+        }, l))
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      id: "features",
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto scroll-mt-24",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SectionHead, {
+        k: "Features",
+        t: "One app. Every asset in the world.",
+        d: "Designers, developers, creators and students \u2014 built for everyone."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+        variants: stagger,
+        initial: "hidden",
+        whileInView: "show",
+        viewport: {
+          once: true,
+          margin: '-60px'
+        },
+        className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-5",
+        children: FEATURES.map(f => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: fadeUp,
+          whileHover: {
+            y: -8,
+            rotate: -0.6
+          },
+          className: "card p-6",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "w-12 h-12 flex items-center justify-center mb-4 btn !p-0 !cursor-default",
+            style: {
+              background: 'var(--accent)',
+              color: 'var(--on-accent)'
+            },
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: f.i,
+              s: 22
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("h3", {
+            className: "font-display text-xl mb-2",
+            children: f.t
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+            className: "muted text-sm leading-relaxed",
+            children: f.d
+          })]
+        }, f.t))
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      id: "library",
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto scroll-mt-24",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SectionHead, {
+        k: "Library",
+        t: "Seven libraries, zero limits",
+        d: "Click any category and jump straight into the studio."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+        variants: stagger,
+        initial: "hidden",
+        whileInView: "show",
+        viewport: {
+          once: true,
+          margin: '-60px'
+        },
+        className: "grid grid-cols-2 md:grid-cols-4 gap-4",
+        children: [CATS.map((c, i) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.button, {
+          variants: fadeUp,
+          whileHover: {
+            y: -8,
+            scale: 1.03
+          },
+          whileTap: {
+            scale: 0.97
+          },
+          onClick: () => openStudio(c.id),
+          className: `card p-5 text-left cursor-pointer ${i === 6 ? 'md:col-span-1' : ''}`,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-4xl sm:text-5xl mb-3 h-14 flex items-center font-display",
+            children: c.e
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "font-display text-lg",
+            children: c.t
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "muted text-xs sm:text-sm mt-1",
+            children: c.d
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "mt-3 text-xs font-bold flex items-center gap-1 accent-text w-fit",
+            children: ["Explore ", /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: "arrow",
+              s: 13
+            })]
+          })]
+        }, c.id)), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: fadeUp,
+          className: "card p-5 flex flex-col justify-center items-start col-span-2 md:col-span-1",
+          style: {
+            background: 'var(--accent)',
+            color: 'var(--on-accent)'
+          },
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "font-display text-xl",
+            children: "\u2026and more online"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-sm mt-1 opacity-90",
+            children: "Material, Phosphor, Fluent 3D, Twemoji, Noto & 150 more sets."
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      id: "playground",
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto scroll-mt-24",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SectionHead, {
+        k: "Playground",
+        t: "Try the customiser right here",
+        d: "Colour, texture, shape \u2014 everything updates live."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "grid lg:grid-cols-2 gap-6",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          initial: {
+            opacity: 0,
+            x: -40
+          },
+          whileInView: {
+            opacity: 1,
+            x: 0
+          },
+          viewport: {
+            once: true
+          },
+          transition: {
+            duration: 0.6
+          },
+          className: "card p-4 sm:p-6",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "plate aspect-square max-h-[420px] w-full mx-auto flex items-center justify-center overflow-hidden checker",
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              style: {
+                width: '78%',
+                height: '78%'
+              },
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(Svg, {
+                a: pgAsset,
+                st: pg,
+                uid: "pg"
+              })
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "flex flex-wrap gap-1.5 mt-4",
+            children: [['rocket', 'Emoji 🚀'], ['github', 'GitHub logo'], ['heart', 'Heart icon'], ['star', 'Star icon'], ['badge', 'Badge sticker'], ['zap', 'Bolt']].map(([k, l]) => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+              className: `chip ${pgA === k ? 'on' : ''}`,
+              onClick: () => {
+                setPgA(k);
+                const o = DEMO[k].kind === 'emoji' || !!DEMO[k].color || DEMO[k].kind === 'sticker';
+                patchPg({
+                  colorMode: o ? 'original' : 'solid'
+                });
+              },
+              children: l
+            }, k))
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          initial: {
+            opacity: 0,
+            x: 40
+          },
+          whileInView: {
+            opacity: 1,
+            x: 0
+          },
+          viewport: {
+            once: true
+          },
+          transition: {
+            duration: 0.6
+          },
+          className: "card p-4 sm:p-6 space-y-4",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "sec-title mb-2",
+              children: "Colour"
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+              value: pg.colorMode,
+              onChange: v => patchPg({
+                colorMode: v
+              }),
+              options: [...(pgOrig ? [{
+                id: 'original',
+                label: 'Original'
+              }] : []), {
+                id: 'solid',
+                label: 'Solid'
+              }, {
+                id: 'gradient',
+                label: 'Gradient'
+              }]
+            }), pg.colorMode !== 'original' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "grid sm:grid-cols-2 gap-3 mt-3",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+                label: "Colour 1",
+                value: pg.color,
+                onChange: v => patchPg({
+                  color: v
+                })
+              }), pg.colorMode === 'gradient' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+                label: "Colour 2",
+                value: pg.color2,
+                onChange: v => patchPg({
+                  color2: v
+                })
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "sec-title mb-2",
+              children: "Texture"
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "flex flex-wrap gap-1.5",
+              children: _render.TEXTURES.map(t => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+                className: `chip ${pg.texture === t.id ? 'on' : ''}`,
+                onClick: () => patchPg({
+                  texture: t.id
+                }),
+                children: t.label
+              }, t.id))
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "sec-title mb-2",
+              children: "Backdrop"
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+              value: pg.bgShape,
+              onChange: v => patchPg({
+                bgShape: v
+              }),
+              options: ['none', 'circle', 'squircle', 'hexagon', 'burst'].map(s => ({
+                id: s,
+                label: s
+              }))
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "grid sm:grid-cols-2 gap-4",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+              label: "Size",
+              value: pg.size,
+              min: 64,
+              max: 512,
+              onChange: v => patchPg({
+                size: v
+              }),
+              unit: "px"
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+              label: "Sticker outline",
+              value: pg.outlineW,
+              min: 0,
+              max: 36,
+              onChange: v => patchPg({
+                outlineW: v
+              })
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+              label: "Glow",
+              value: pg.glow,
+              min: 0,
+              max: 25,
+              onChange: v => patchPg({
+                glow: v
+              })
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+              label: "Rotate",
+              value: pg.rotate,
+              min: -180,
+              max: 180,
+              onChange: v => patchPg({
+                rotate: v
+              }),
+              unit: "\xB0"
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+            className: "btn btn-primary btn-lg w-full",
+            onClick: () => openStudio(),
+            children: ["Open the full studio", /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: "arrow",
+              s: 18
+            })]
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      id: "themes",
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto scroll-mt-24",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SectionHead, {
+        k: "Themes",
+        t: "12 themes. One click.",
+        d: "Every theme previews live \u2014 the whole app changes the moment you click."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+        variants: stagger,
+        initial: "hidden",
+        whileInView: "show",
+        viewport: {
+          once: true,
+          margin: '-60px'
+        },
+        className: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4",
+        children: _themes.THEMES.map(t => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: fadeUp,
+          whileHover: {
+            y: -6,
+            rotate: -1
+          },
+          role: "button",
+          tabIndex: 0,
+          onClick: () => setTheme(t.id),
+          onKeyDown: e => e.key === 'Enter' && setTheme(t.id),
+          className: "cursor-pointer",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            "data-theme": t.id,
+            className: "theme-scope rounded-3xl p-3 sm:p-4 overflow-hidden relative",
+            style: {
+              outline: t.id === theme ? '3px solid var(--accent-solid)' : '1px solid rgba(128,128,128,.3)',
+              outlineOffset: 3
+            },
+            children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "card p-3",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                className: "font-display text-sm sm:text-base truncate",
+                children: t.name
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                className: "text-[10px] sm:text-[11px] muted truncate",
+                children: t.tag
+              }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+                className: "flex gap-1.5 mt-2.5 flex-wrap",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                  className: "chip on !text-[10px] !px-2 !py-1",
+                  children: "Icons"
+                }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                  className: "chip !text-[10px] !px-2 !py-1",
+                  children: "Logos"
+                })]
+              }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+                className: "mt-3 flex gap-2 items-center",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                  className: "btn btn-primary !py-1.5 !px-3 !text-[11px] !cursor-pointer",
+                  children: "Export"
+                }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                  className: "inset flex-1 h-7"
+                })]
+              })]
+            })
+          }), t.id === theme && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-center text-xs font-bold mt-2 accent-text w-full",
+            children: "\u25CF Active"
+          })]
+        }, t.id))
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+      className: "px-4 sm:px-8 py-16 max-w-7xl mx-auto",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(SectionHead, {
+        k: "How it works",
+        t: "Search. Customise. Export.",
+        d: "Three steps and your asset is ready."
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_framerMotion.motion.div, {
+        variants: stagger,
+        initial: "hidden",
+        whileInView: "show",
+        viewport: {
+          once: true
+        },
+        className: "grid md:grid-cols-3 gap-5",
+        children: [['01', 'search', 'Find anything', 'Type a word — instantly filter built-in libraries or search 200k+ online icons and stickers.'], ['02', 'sliders', 'Make it yours', 'Change colour, gradient, texture, outline, glow, backdrop, rotation and size with live preview.'], ['03', 'download', 'Export anywhere', 'Download SVG, PNG, WebP or JPG up to 4096px — or copy the code or image to your clipboard.']].map(([n, ic, t, d]) => /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+          variants: fadeUp,
+          className: "card p-6 relative overflow-hidden",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "font-display text-7xl opacity-10 absolute -top-2 right-3",
+            children: n
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "w-11 h-11 btn !p-0 !cursor-default mb-4",
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: ic,
+              s: 20
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("h3", {
+            className: "font-display text-xl mb-2",
+            children: t
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+            className: "muted text-sm leading-relaxed",
+            children: d
+          })]
+        }, n))
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("section", {
+      className: "px-4 sm:px-8 py-16 max-w-5xl mx-auto",
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+        initial: {
+          opacity: 0,
+          scale: 0.92
+        },
+        whileInView: {
+          opacity: 1,
+          scale: 1
+        },
+        viewport: {
+          once: true
+        },
+        transition: {
+          duration: 0.6
+        },
+        className: "card p-8 sm:p-14 text-center relative overflow-hidden",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "absolute inset-0 opacity-25 pointer-events-none",
+          style: {
+            background: 'var(--accent)'
+          }
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "relative",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-5xl mb-4 floaty inline-block",
+            children: "\uD83C\uDF0D"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("h2", {
+            className: "font-display text-3xl sm:text-5xl",
+            children: ["Ready to build with ", /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              className: "accent-text",
+              children: "everything"
+            }), "?"]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+            className: "muted mt-4 max-w-xl mx-auto",
+            children: "No sign-up, no limits. Just open it and start creating."
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+            className: "btn btn-primary btn-lg mt-8",
+            onClick: () => openStudio(),
+            children: ["Launch AssetVerse", /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: "arrow",
+              s: 18
+            })]
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("footer", {
+      className: "px-4 sm:px-8 pb-10 max-w-7xl mx-auto text-center muted text-xs leading-relaxed",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "flex items-center justify-center gap-2 mb-3",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Logo, {
+          size: 26
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          className: "font-display text-base",
+          style: {
+            color: 'var(--fg)'
+          },
+          children: "AssetVerse"
+        })]
+      }), "Powered by Lucide, Simple Icons, Iconify, Emojibase, Fontsource & Google Fonts. Brand names and logos are trademarks of their respective owners."]
+    })]
+  });
+}
+function SectionHead({
+  k,
+  t,
+  d
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_framerMotion.motion.div, {
+    initial: {
+      opacity: 0,
+      y: 24
+    },
+    whileInView: {
+      opacity: 1,
+      y: 0
+    },
+    viewport: {
+      once: true
+    },
+    transition: {
+      duration: 0.6
+    },
+    className: "text-center mb-10 sm:mb-14",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: "chip on !cursor-default mb-4",
+      children: k
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("h2", {
+      className: "font-display text-3xl sm:text-5xl",
+      children: t
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+      className: "muted mt-3 max-w-xl mx-auto",
+      children: d
+    })]
+  });
+}
+};
+__m["src/components/Studio.tsx"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TABS = void 0;
+exports.default = Studio;
+var _react = __r("ext:react");
+var _data = __r("src/lib/data.ts");
+var _render = __r("src/lib/render.ts");
+var _Customizer = _interopRequireDefault(__r("src/components/Customizer.tsx"));
+var _ui = __r("src/components/ui.tsx");
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const TABS = exports.TABS = [{
+  id: 'icon',
+  label: 'Icons',
+  ico: 'shapes',
+  hint: 'Search icons…'
+}, {
+  id: 'logo',
+  label: 'Logos',
+  ico: 'award',
+  hint: 'Search brands (GitHub, Spotify…)'
+}, {
+  id: 'sticker',
+  label: 'Stickers',
+  ico: 'sticker',
+  hint: 'Search stickers (heart, cat, party…)'
+}, {
+  id: 'emoji',
+  label: 'Emojis',
+  ico: 'smile',
+  hint: 'Search emojis (fire, heart, party…)'
+}, {
+  id: 'symbol',
+  label: 'Symbols',
+  ico: 'hash',
+  hint: 'Search symbols or U+2605…'
+}, {
+  id: 'font',
+  label: 'Fonts',
+  ico: 'type',
+  hint: 'Search fonts (Poppins, Lobster…)'
+}, {
+  id: 'text',
+  label: 'Text styles',
+  ico: 'sparkles',
+  hint: ''
+}];
+const DEFAULT_Q = {
+  icon: 'star',
+  logo: 'logo',
+  sticker: 'smile'
+};
+const PAGE = 120;
+const ONLINE_PAGE = 60;
+
+/* ---------------- data hook ---------------- */
+function useAssets(tab, source, query, group, fancyText) {
+  const online = (tab === 'icon' || tab === 'logo' || tab === 'sticker') && source !== 'local';
+  const [base, setBase] = (0, _react.useState)([]);
+  const [loading, setLoading] = (0, _react.useState)(false);
+  const [error, setError] = (0, _react.useState)('');
+  const [nonce, setNonce] = (0, _react.useState)(0);
+  const [limit, setLimit] = (0, _react.useState)(PAGE);
+  const [remote, setRemote] = (0, _react.useState)({
+    items: [],
+    total: 0,
+    done: false,
+    next: 0
+  });
+  const req = (0, _react.useRef)(0);
+  const rq = query.trim();
+
+  // local list
+  (0, _react.useEffect)(() => {
+    if (online) return;
+    let live = true;
+    setLimit(PAGE);
+    setError('');
+    if (tab === 'text') {
+      setBase((0, _data.makeFancy)(fancyText.trim()));
+      return;
+    }
+    setLoading(true);
+    const p = tab === 'icon' ? (0, _data.loadLucide)() : tab === 'logo' ? (0, _data.loadLogos)() : tab === 'sticker' ? Promise.resolve((0, _data.makeBadges)()) : tab === 'emoji' ? (0, _data.loadEmoji)() : tab === 'symbol' ? (0, _data.loadSymbols)() : (0, _data.loadFonts)();
+    p.then(a => {
+      if (live) {
+        setBase(a);
+        setLoading(false);
+      }
+    }).catch(() => {
+      if (live) {
+        setError('Could not load this library. Check your internet connection and try again.');
+        setLoading(false);
+      }
+    });
+    return () => {
+      live = false;
+    };
+  }, [tab, online, fancyText, nonce]);
+
+  // remote
+  const fetchRemote = (0, _react.useCallback)(async (start, replace) => {
+    const id = ++req.current;
+    setLoading(true);
+    setError('');
+    try {
+      const kind = tab;
+      const res = rq || source === 'all' ? await (0, _data.searchIconify)(rq || DEFAULT_Q[tab], source === 'all' ? '' : source, start, ONLINE_PAGE, kind) : await (0, _data.browseIconify)(source, start, ONLINE_PAGE, kind);
+      if (id !== req.current) return;
+      setRemote(r => {
+        const items = replace ? res.items : [...r.items, ...res.items.filter(x => !r.items.some(y => y.id === x.id))];
+        return {
+          items,
+          total: res.total,
+          done: start + ONLINE_PAGE >= res.total,
+          next: start + ONLINE_PAGE
+        };
+      });
+    } catch {
+      if (id === req.current) setError('Could not reach the online library. Check your internet connection and try again.');
+    } finally {
+      if (id === req.current) setLoading(false);
+    }
+  }, [tab, source, rq]);
+  (0, _react.useEffect)(() => {
+    if (!online) return;
+    setRemote({
+      items: [],
+      total: 0,
+      done: false,
+      next: 0
+    });
+    const t = setTimeout(() => fetchRemote(0, true), rq ? 350 : 0);
+    return () => clearTimeout(t);
+  }, [online, fetchRemote, rq]);
+  const filtered = (0, _react.useMemo)(() => {
+    if (online) return remote.items;
+    const q = rq.toLowerCase();
+    const words = q.split(/\s+/).filter(Boolean);
+    return base.filter(a => (!group || a.group === group) && (words.length === 0 || words.every(w => (a.tags || a.name.toLowerCase()).includes(w) || a.name.toLowerCase().includes(w))));
+  }, [online, remote.items, base, rq, group]);
+  (0, _react.useEffect)(() => {
+    setLimit(PAGE);
+  }, [rq, group, tab, source]);
+  const groups = (0, _react.useMemo)(() => online ? [] : [...new Set(base.map(a => a.group).filter(Boolean))], [online, base]);
+  const items = online ? filtered : filtered.slice(0, limit);
+  const hasMore = online ? !remote.done && remote.next > 0 : filtered.length > limit;
+  const retry = () => {
+    if (online) fetchRemote(0, true);else setNonce(n => n + 1);
+  };
+  const loadMore = () => {
+    if (loading) return;
+    if (online) fetchRemote(remote.next, false);else setLimit(l => l + PAGE);
+  };
+  return {
+    items,
+    loading,
+    error,
+    hasMore,
+    loadMore,
+    retry,
+    groups,
+    total: online ? remote.total : filtered.length,
+    online
+  };
+}
+
+/* ---------------- tile ---------------- */
+const THUMB_STYLE = {
+  ..._render.DEFAULT_STYLE,
+  color: '#334155'
+};
+const Tile = /*#__PURE__*/(0, _react.memo)(function Tile({
+  a,
+  selected,
+  onPick,
+  sample
+}) {
+  const wide = a.kind === 'font' || a.kind === 'text' || a.kind === 'symbol' && (a.text?.length || 0) > 3;
+  const svg = (0, _react.useMemo)(() => a.text === undefined ? (0, _render.buildSvg)(a, THUMB_STYLE, {
+    plain: true,
+    forceSize: 56,
+    uid: 't'
+  }).svg : '', [a]);
+  const ref = (0, _react.useRef)(null);
+  (0, _react.useEffect)(() => {
+    if (a.kind !== 'font' || !a.font || !ref.current) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        (0, _render.ensureFont)(a.font);
+        io.disconnect();
+      }
+    }, {
+      rootMargin: '300px'
+    });
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [a]);
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    ref: ref,
+    onClick: () => onPick(a),
+    title: a.name,
+    className: `tile text-left ${selected ? 'sel' : ''} ${wide && a.kind === 'symbol' ? 'col-span-2' : ''}`,
+    style: {
+      aspectRatio: wide ? undefined : '1 / 1'
+    },
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: `plate w-full h-full flex items-center justify-center ${wide ? 'min-h-[84px] px-3 py-3' : 'p-3'}`,
+      style: {
+        borderRadius: 'inherit'
+      },
+      children: a.text === undefined ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "w-full h-full max-w-[56px] max-h-[56px] [&>svg]:w-full [&>svg]:h-full",
+        dangerouslySetInnerHTML: {
+          __html: svg
+        }
+      }) : a.kind === 'emoji' ? /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: {
+          fontSize: 34,
+          lineHeight: 1,
+          fontFamily: "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif"
+        },
+        children: a.text
+      }) : a.kind === 'font' ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "text-center w-full overflow-hidden",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "truncate",
+          style: {
+            fontFamily: `'${a.font}', sans-serif`,
+            fontSize: 26,
+            lineHeight: 1.2
+          },
+          children: sample || 'Aa Bb Cc'
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "text-[10px] opacity-60 mt-1 truncate font-sans",
+          children: [a.name, " \xB7 ", a.group]
+        })]
+      }) : a.kind === 'text' ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "text-center w-full",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "text-[19px] leading-snug break-words",
+          children: a.text
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "text-[10px] opacity-55 mt-1 font-sans",
+          children: a.name
+        })]
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        style: {
+          fontSize: wide ? 18 : 30,
+          lineHeight: 1,
+          fontFamily: "'Segoe UI Symbol','Apple Symbols','Noto Sans Symbols 2','Noto Sans','DejaVu Sans',sans-serif"
+        },
+        children: a.text
+      })
+    })
+  });
+});
+
+/* ---------------- Studio ---------------- */
+
+function Studio({
+  tab,
+  setTab,
+  theme,
+  setTheme,
+  onHome
+}) {
+  const [query, setQuery] = (0, _react.useState)('');
+  const [source, setSource] = (0, _react.useState)('local');
+  const [group, setGroup] = (0, _react.useState)('');
+  const [fancyText, setFancyText] = (0, _react.useState)('Hello World');
+  const [fontText, setFontText] = (0, _react.useState)('');
+  const [selected, setSelected] = (0, _react.useState)(null);
+  const [sheet, setSheet] = (0, _react.useState)(false);
+  const [st, setSt] = (0, _react.useState)(_render.DEFAULT_STYLE);
+  const prevOrig = (0, _react.useRef)(null);
+  const sentinel = (0, _react.useRef)(null);
+  const {
+    items,
+    loading,
+    error,
+    hasMore,
+    loadMore,
+    retry,
+    groups,
+    total,
+    online
+  } = useAssets(tab, source, query, group, fancyText);
+  (0, _react.useEffect)(() => {
+    setQuery('');
+    setGroup('');
+    setSource(tab === 'icon' || tab === 'logo' || tab === 'sticker' ? 'local' : '');
+    window.scrollTo({
+      top: 0
+    });
+  }, [tab]);
+
+  // infinite scroll
+  const lm = (0, _react.useRef)(loadMore);
+  lm.current = loadMore;
+  (0, _react.useEffect)(() => {
+    const el = sentinel.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) lm.current();
+    }, {
+      rootMargin: '600px'
+    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasMore, items.length, loading]);
+  const patch = (0, _react.useCallback)(p => setSt(s => ({
+    ...s,
+    ...p
+  })), []);
+  const reset = (0, _react.useCallback)(() => setSt(s => ({
+    ..._render.DEFAULT_STYLE,
+    size: s.size,
+    colorMode: selected && (0, _render.hasOriginalColors)(selected) ? 'original' : 'solid'
+  })), [selected]);
+  const pick = (0, _react.useCallback)(a => {
+    setSelected(a);
+    setSheet(true);
+    const o = (0, _render.hasOriginalColors)(a);
+    setSt(s => {
+      const n = {
+        ...s,
+        text: a.kind === 'font' ? fontText || null : null
+      };
+      if (a.kind === 'font') n.fontFamily = '';
+      if (prevOrig.current !== o) n.colorMode = o ? 'original' : 'solid';
+      if (!o && n.colorMode === 'original') n.colorMode = 'solid';
+      if (a.stroke === undefined) n.strokeWidth = _render.DEFAULT_STYLE.strokeWidth;
+      return n;
+    });
+    prevOrig.current = o;
+  }, [fontText]);
+  const sets = tab === 'icon' || tab === 'logo' || tab === 'sticker' ? _data.ONLINE_SETS[tab] : [];
+  const tabMeta = TABS.find(t => t.id === tab);
+  const localLabel = tab === 'icon' ? 'Lucide (built-in)' : tab === 'logo' ? 'Brand logos · official colours' : 'Badge stickers';
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: "min-h-screen pb-24 lg:pb-10",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("header", {
+      className: "sticky top-0 z-30 px-3 sm:px-6 pt-3",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "card flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          onClick: onHome,
+          className: "flex items-center gap-2 cursor-pointer",
+          "aria-label": "Home",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Logo, {
+            size: 32
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "font-display text-lg hidden sm:block",
+            children: "AssetVerse"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("nav", {
+          className: "hidden lg:flex items-center gap-1.5 mx-3 flex-1 overflow-x-auto no-scrollbar",
+          children: TABS.map(t => /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+            className: `chip !px-3.5 !py-2 !text-[13px] ${tab === t.id ? 'on' : ''}`,
+            onClick: () => setTab(t.id),
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+              n: t.ico,
+              s: 15
+            }), t.label]
+          }, t.id))
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "flex-1 lg:hidden"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          className: "btn !px-3",
+          onClick: onHome,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+            n: "home",
+            s: 16
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "hidden sm:inline",
+            children: "Home"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ThemeSwitcher, {
+          theme: theme,
+          setTheme: setTheme
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("nav", {
+        className: "lg:hidden flex gap-1.5 overflow-x-auto no-scrollbar pt-2.5 pb-1 -mx-1 px-1",
+        children: TABS.map(t => /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          className: `chip !px-3 !py-2 ${tab === t.id ? 'on' : ''}`,
+          onClick: () => setTab(t.id),
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+            n: t.ico,
+            s: 14
+          }), t.label]
+        }, t.id))
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("main", {
+      className: "px-3 sm:px-6 mt-4 grid lg:grid-cols-[minmax(0,1fr)_390px] gap-5 items-start",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("section", {
+        className: "card p-3.5 sm:p-5 min-w-0",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "flex flex-col gap-3",
+          children: [tab === 'text' ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            className: "block",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+              className: "sec-title",
+              children: ["Type your text \u2014 get ", (0, _data.makeFancy)('a').length, "+ unicode styles"]
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+              className: "field mt-1.5",
+              value: fancyText,
+              onChange: e => setFancyText(e.target.value),
+              placeholder: "Type anything\u2026",
+              maxLength: 80
+            })]
+          }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "flex flex-col sm:flex-row gap-2.5",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "relative flex-1",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "absolute left-3.5 top-1/2 -translate-y-1/2 muted",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                  n: "search",
+                  s: 17
+                })
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+                className: "field !pl-10",
+                value: query,
+                onChange: e => setQuery(e.target.value),
+                placeholder: tabMeta.hint,
+                "aria-label": "Search"
+              }), query && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+                className: "absolute right-3 top-1/2 -translate-y-1/2 muted cursor-pointer",
+                onClick: () => setQuery(''),
+                "aria-label": "Clear",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                  n: "x",
+                  s: 16
+                })
+              })]
+            }), tab === 'font' && /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+              className: "field sm:max-w-[16rem]",
+              value: fontText,
+              onChange: e => setFontText(e.target.value),
+              placeholder: "Preview text\u2026",
+              maxLength: 40
+            })]
+          }), sets.length > 0 && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "flex gap-1.5 overflow-x-auto no-scrollbar pb-1 items-center",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+              className: `chip ${source === 'local' ? 'on' : ''}`,
+              onClick: () => setSource('local'),
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                n: "zap",
+                s: 13
+              }), localLabel]
+            }), sets.map(s => /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+              className: `chip ${source === (s.prefix || 'all') ? 'on' : ''}`,
+              onClick: () => setSource(s.prefix || 'all'),
+              children: [s.prefix === '' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+                n: "globe",
+                s: 13
+              }), s.label]
+            }, s.prefix || 'all'))]
+          }), groups.length > 1 && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "flex gap-1.5 overflow-x-auto no-scrollbar pb-1",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+              className: `chip ${group === '' ? 'on' : ''}`,
+              onClick: () => setGroup(''),
+              children: "All"
+            }), groups.map(g => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+              className: `chip ${group === g ? 'on' : ''}`,
+              onClick: () => setGroup(g),
+              children: g
+            }, g))]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "text-xs muted flex items-center gap-2",
+            children: [online && !query && source === 'all' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+              children: ["Showing popular \u201C", DEFAULT_Q[tab], "\u201D results \u2014 search anything from 200,000+ online icons."]
+            }), online && query && /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+              children: [total.toLocaleString(), " results from Iconify"]
+            }), online && !query && source !== 'all' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+              children: ["Browsing ", sets.find(s => s.prefix === source)?.label, " \xB7 ", total.toLocaleString(), " items"]
+            }), !online && tab !== 'text' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+              children: [total.toLocaleString(), " ", tabMeta.label.toLowerCase(), query ? ' match' : '', " \xB7 click any to customise"]
+            }), tab === 'text' && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              children: "Click a style to customise & copy."
+            })]
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "grid gap-2.5 sm:gap-3 mt-4",
+          style: {
+            gridTemplateColumns: `repeat(auto-fill, minmax(${tab === 'font' || tab === 'text' ? '210px' : '82px'}, 1fr))`
+          },
+          children: items.map(a => /*#__PURE__*/(0, _jsxRuntime.jsx)(Tile, {
+            a: a,
+            selected: selected?.id === a.id,
+            onPick: pick,
+            sample: fontText
+          }, a.id))
+        }), loading && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "flex justify-center py-8",
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "w-8 h-8 rounded-full border-4 border-current border-t-transparent animate-spin muted"
+          })
+        }), !loading && items.length === 0 && !error && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "text-center py-14 muted",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-5xl mb-3",
+            children: "\uD83D\uDD0D"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "font-semibold",
+            children: ["Nothing found", query ? ` for “${query}”` : '']
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            className: "text-sm mt-1",
+            children: ["Try another word", !online && (tab === 'icon' || tab === 'logo' || tab === 'sticker') ? ' or switch to an online library above' : '', "."]
+          })]
+        }), error && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "text-center py-8 text-sm muted",
+          children: ["\u26A0\uFE0F ", error, " ", /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            className: "btn ml-2",
+            onClick: retry,
+            children: "Retry"
+          })]
+        }), hasMore && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          ref: sentinel,
+          className: "h-10"
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("aside", {
+        className: `${sheet && selected ? 'fixed inset-x-2 bottom-2 top-[18vh] z-40 overflow-auto max-lg:[background:var(--bg)]' : 'hidden'} lg:block lg:sticky lg:top-24 lg:max-h-[calc(100vh-7.5rem)] lg:overflow-auto thin-scroll card p-4 pop-in`,
+        children: selected ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Customizer.default, {
+          asset: selected,
+          st: st,
+          patch: patch,
+          reset: reset,
+          onClose: () => setSheet(false)
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "text-center py-16 px-4",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "text-6xl mb-4 floaty inline-block",
+            children: "\uD83C\uDFA8"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "font-display text-xl",
+            children: "Pick any asset"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+            className: "muted text-sm mt-2",
+            children: "Select an icon, logo, sticker, emoji, symbol or font to change its colour, texture, size and export it."
+          })]
+        })
+      })]
+    }), sheet && selected && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: "fixed inset-0 z-30 bg-black/50 lg:hidden",
+      onClick: () => setSheet(false)
+    }), !sheet && selected && /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+      className: "btn btn-primary fixed bottom-4 left-1/2 -translate-x-1/2 z-30 lg:hidden !px-6 !py-3.5 shadow-2xl",
+      onClick: () => setSheet(true),
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+        n: "sliders",
+        s: 16
+      }), "Customise \u201C", selected.name.slice(0, 18), "\u201D"]
+    })]
+  });
+}
+};
+__m["src/lib/themes.ts"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.THEMES = void 0;
+const THEMES = exports.THEMES = [{
+  id: 'glass',
+  name: 'Glassmorphism',
+  tag: 'Frosted blur & light',
+  dot: ['#7c5cff', '#22d3ee']
+}, {
+  id: 'liquid',
+  name: 'Liquid Glass',
+  tag: 'Bright translucent',
+  dot: ['#60a5fa', '#f0abfc']
+}, {
+  id: 'neu',
+  name: 'Neumorphism',
+  tag: 'Soft extruded UI',
+  dot: ['#e0e5ec', '#a3b1c6']
+}, {
+  id: 'neudark',
+  name: 'Dark Neumorphism',
+  tag: 'Soft & moody',
+  dot: ['#2b2f3a', '#12141a']
+}, {
+  id: 'clay',
+  name: 'Claymorphism',
+  tag: 'Puffy 3D clay',
+  dot: ['#ff9ec7', '#9ad7ff']
+}, {
+  id: 'maxi',
+  name: 'Maximalism',
+  tag: 'More is more',
+  dot: ['#ff2e93', '#ffe600']
+}, {
+  id: 'brutal',
+  name: 'Neubrutalism',
+  tag: 'Hard shadows',
+  dot: ['#ffde59', '#111111']
+}, {
+  id: 'aurora',
+  name: 'Aurora',
+  tag: 'Gradient mesh glow',
+  dot: ['#34d399', '#8b5cf6']
+}, {
+  id: 'cyber',
+  name: 'Cyberpunk',
+  tag: 'Neon grid',
+  dot: ['#00f0ff', '#ff00aa']
+}, {
+  id: 'skeuo',
+  name: 'Skeuomorphism',
+  tag: 'Real materials',
+  dot: ['#c8ccd2', '#6b7280']
+}, {
+  id: 'retro',
+  name: 'Retro Y2K',
+  tag: 'Chrome & candy',
+  dot: ['#a78bfa', '#fb7185']
+}, {
+  id: 'minimal',
+  name: 'Minimal',
+  tag: 'Clean & quiet',
+  dot: ['#ffffff', '#111111']
+}];
+};
+__m["src/lib/data.ts"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ONLINE_SETS = exports.FANCY = exports.EMOJI_GROUPS = void 0;
+exports.browseIconify = browseIconify;
+exports.makeFancy = exports.makeBadges = exports.lucideAsset = exports.loadSymbols = exports.loadLucide = exports.loadLogos = exports.loadFonts = exports.loadEmoji = void 0;
+exports.searchIconify = searchIconify;
+const cache = {};
+const once = (key, fn) => cache[key] ??= fn().catch(e => {
+  delete cache[key];
+  throw e;
+});
+const words = s => s.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/[-_]/g, ' ');
+const netFetch = async (url, opts = {}, tries = 3, ms = 12000) => {
+  let last;
+  for (let i = 0; i < tries; i++) {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), ms);
+    try {
+      const res = await fetch(url, {
+        ...opts,
+        signal: ctl.signal
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res;
+    } catch (e) {
+      last = e;
+      if (i < tries - 1) await new Promise(r => setTimeout(r, 600 * (i + 1)));
+    } finally {
+      clearTimeout(t);
+    }
+  }
+  throw last;
+};
+
+/* ---------------- Lucide (icons) ---------------- */
+const lucideAsset = (name, nodes) => {
+  const body = nodes.map(([tag, attrs]) => `<${tag} ${Object.entries(attrs).map(([k, v]) => `${k}="${v}"`).join(' ')}/>`).join('');
+  const nm = words(name);
+  return {
+    id: `lucide:${name}`,
+    kind: 'icon',
+    name: nm,
+    tags: nm.toLowerCase(),
+    src: 'Lucide',
+    vb: [0, 0, 24, 24],
+    body,
+    mono: true,
+    stroke: true
+  };
+};
+exports.lucideAsset = lucideAsset;
+const loadLucide = () => once('lucide', async () => {
+  const {
+    icons
+  } = await import('lucide');
+  return Object.entries(icons).map(([name, nodes]) => lucideAsset(name, nodes));
+});
+
+/* ---------------- Brand logos (Simple Icons, original colours) ---------------- */
+exports.loadLucide = loadLucide;
+const loadLogos = () => once('logos', async () => {
+  let si;
+  try {
+    si = await import('simple-icons');
+  } catch {
+    si = await import('https://cdn.jsdelivr.net/npm/simple-icons@13/+esm');
+  }
+  const out = [];
+  for (const k of Object.keys(si)) {
+    const i = si[k];
+    if (!i || !i.slug || !i.path || !i.hex) continue;
+    out.push({
+      id: `si:${i.slug}`,
+      kind: 'logo',
+      name: i.title,
+      tags: `${i.title} ${i.slug} brand logo`.toLowerCase(),
+      src: 'Simple Icons',
+      vb: [0, 0, 24, 24],
+      body: `<path d="${i.path}" fill="currentColor"/>`,
+      mono: true,
+      color: `#${i.hex}`
+    });
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name));
+});
+
+/* ---------------- Emoji ---------------- */
+exports.loadLogos = loadLogos;
+const EMOJI_GROUPS = exports.EMOJI_GROUPS = ['Smileys', 'People', 'Components', 'Animals & Nature', 'Food & Drink', 'Travel', 'Activities', 'Objects', 'Symbols', 'Flags'];
+const loadEmoji = () => once('emoji', async () => {
+  const data = await (await netFetch('https://cdn.jsdelivr.net/npm/emojibase-data@16/en/compact.json')).json();
+  return data.filter(e => e.group !== undefined && e.group !== 2).map(e => ({
+    id: `emoji:${e.hexcode}`,
+    kind: 'emoji',
+    name: e.label,
+    group: EMOJI_GROUPS[e.group],
+    tags: `${e.label} ${(e.tags || []).join(' ')}`.toLowerCase(),
+    vb: [0, 0, 130, 130],
+    text: e.unicode,
+    multi: true
+  }));
+});
+
+/* ---------------- Symbols ---------------- */
+exports.loadEmoji = loadEmoji;
+const BLOCKS = [['Arrows', 0x2190, 0x21ff], ['Math', 0x2200, 0x22ff], ['Technical', 0x2300, 0x23ff], ['Box Drawing', 0x2500, 0x257f], ['Blocks', 0x2580, 0x259f], ['Shapes', 0x25a0, 0x25ff], ['Misc Symbols', 0x2600, 0x26ff], ['Dingbats', 0x2700, 0x27bf], ['Arrows+', 0x27f0, 0x27ff], ['Braille', 0x2800, 0x28ff], ['Currency', 0x20a0, 0x20cf], ['Letterlike', 0x2100, 0x214f], ['Numbers', 0x2150, 0x218f], ['Enclosed', 0x2460, 0x24ff], ['Punctuation', 0x2010, 0x2027], ['Latin Symbols', 0x00a1, 0x00bf], ['Super/Sub', 0x2070, 0x209f], ['Greek', 0x0391, 0x03c9], ['Devanagari', 0x0900, 0x097f], ['Runes', 0x16a0, 0x16ea], ['Hiragana', 0x3041, 0x3096], ['Katakana', 0x30a1, 0x30fa], ['Cards & Games', 0x1f000, 0x1f0ff], ['Music', 0x1d100, 0x1d126], ['Geometric+', 0x1f780, 0x1f7ff], ['Emoticons', 0x1f600, 0x1f64f], ['Hearts & Stars', 0x2764, 0x2767]];
+const KAOMOJI = ['(╯°□°)╯︵ ┻━┻', '¯\\_(ツ)_/¯', '(づ｡◕‿‿◕｡)づ', '(ノ◕ヮ◕)ノ*:･ﾟ✧', 'ʕ•ᴥ•ʔ', '(◕‿◕✿)', '(ʘ‿ʘ)', 'ಠ_ಠ', '(＾▽＾)', '(≧◡≦)', '(¬‿¬)', '(︶︹︺)', '(╥﹏╥)', '(•̀ᴗ•́)و', '٩(◕‿◕)۶', '(｡♥‿♥｡)', '(☞ﾟヮﾟ)☞', '♪(´ε｀ )', '(⌐■_■)', '(•_•) ( •_•)>⌐■-■', '┬─┬ ノ( ゜-゜ノ)', '(ง •̀_•́)ง', '(´• ω •`)', 'ᕕ( ᐛ )ᕗ', '(⊙_⊙)', '¯\\(°_o)/¯', '☜(ﾟヮﾟ☜)', '(눈_눈)', '(ᵔᴥᵔ)', '(=^･ω･^=)', '≧◉ᴥ◉≦', '(҂◡_◡) ᕤ', '♡(˃͈ દ ˂͈ ༶ )', '✧･ﾟ: *✧･ﾟ:*', '★彡', '⊂(◉‿◉)つ', '(ღ˘⌣˘ღ)', '( ͡° ͜ʖ ͡°)', '♬♪♫', '꒰ᐢ. .ᐢ꒱'];
+const loadSymbols = () => once('symbols', async () => {
+  const out = [];
+  const ok = /^[\p{L}\p{N}\p{S}\p{P}\p{M}]$/u;
+  for (const [group, a, b] of BLOCKS) {
+    for (let c = a; c <= b; c++) {
+      const ch = String.fromCodePoint(c);
+      if (!ok.test(ch)) continue;
+      const hex = c.toString(16).toUpperCase().padStart(4, '0');
+      out.push({
+        id: `sym:${hex}`,
+        kind: 'symbol',
+        name: `U+${hex}`,
+        group,
+        tags: `${group} u+${hex} ${hex}`.toLowerCase(),
+        vb: [0, 0, 130, 130],
+        text: ch
+      });
+    }
+  }
+  KAOMOJI.forEach((k, i) => out.push({
+    id: `kao:${i}`,
+    kind: 'symbol',
+    name: 'Text face',
+    group: 'Text Faces',
+    tags: 'kaomoji text face emoticon art',
+    vb: [0, 0, 130, 130],
+    text: k
+  }));
+  return out.sort((x, y) => x.group === 'Text Faces' ? -1 : y.group === 'Text Faces' ? 1 : 0);
+});
+
+/* ---------------- Fancy text generator ---------------- */
+exports.loadSymbols = loadSymbols;
+const map = (t, U, L, D, ex = {}) => Array.from(t).map(ch => {
+  if (ex[ch]) return String.fromCodePoint(ex[ch]);
+  const c = ch.codePointAt(0);
+  if (c >= 65 && c <= 90) return String.fromCodePoint(U + c - 65);
+  if (c >= 97 && c <= 122) return String.fromCodePoint(L + c - 97);
+  if (D && c >= 48 && c <= 57) return String.fromCodePoint(D + c - 48);
+  return ch;
+}).join('');
+const SMALLCAPS = 'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ';
+const FLIP = {
+  a: 'ɐ',
+  b: 'q',
+  c: 'ɔ',
+  d: 'p',
+  e: 'ǝ',
+  f: 'ɟ',
+  g: 'ƃ',
+  h: 'ɥ',
+  i: 'ᴉ',
+  j: 'ɾ',
+  k: 'ʞ',
+  l: 'l',
+  m: 'ɯ',
+  n: 'u',
+  o: 'o',
+  p: 'd',
+  q: 'b',
+  r: 'ɹ',
+  s: 's',
+  t: 'ʇ',
+  u: 'n',
+  v: 'ʌ',
+  w: 'ʍ',
+  x: 'x',
+  y: 'ʎ',
+  z: 'z',
+  '?': '¿',
+  '!': '¡',
+  '.': '˙',
+  ',': "'",
+  '(': ')',
+  ')': '(',
+  '1': 'Ɩ',
+  '2': 'ᄅ',
+  '3': 'Ɛ',
+  '4': 'ㄣ',
+  '5': 'ϛ',
+  '6': '9',
+  '7': 'ㄥ',
+  '8': '8',
+  '9': '6',
+  '0': '0'
+};
+const SUP = {
+  a: 'ᵃ',
+  b: 'ᵇ',
+  c: 'ᶜ',
+  d: 'ᵈ',
+  e: 'ᵉ',
+  f: 'ᶠ',
+  g: 'ᵍ',
+  h: 'ʰ',
+  i: 'ⁱ',
+  j: 'ʲ',
+  k: 'ᵏ',
+  l: 'ˡ',
+  m: 'ᵐ',
+  n: 'ⁿ',
+  o: 'ᵒ',
+  p: 'ᵖ',
+  q: 'q',
+  r: 'ʳ',
+  s: 'ˢ',
+  t: 'ᵗ',
+  u: 'ᵘ',
+  v: 'ᵛ',
+  w: 'ʷ',
+  x: 'ˣ',
+  y: 'ʸ',
+  z: 'ᶻ',
+  '0': '⁰',
+  '1': '¹',
+  '2': '²',
+  '3': '³',
+  '4': '⁴',
+  '5': '⁵',
+  '6': '⁶',
+  '7': '⁷',
+  '8': '⁸',
+  '9': '⁹'
+};
+const FANCY = exports.FANCY = [['Bold', t => map(t, 0x1d400, 0x1d41a, 0x1d7ce)], ['Italic', t => map(t, 0x1d434, 0x1d44e, undefined, {
+  h: 0x210e
+})], ['Bold Italic', t => map(t, 0x1d468, 0x1d482)], ['Script', t => map(t, 0x1d49c, 0x1d4b6, undefined, {
+  B: 0x212c,
+  E: 0x2130,
+  F: 0x2131,
+  H: 0x210b,
+  I: 0x2110,
+  L: 0x2112,
+  M: 0x2133,
+  R: 0x211b,
+  e: 0x212f,
+  g: 0x210a,
+  o: 0x2134
+})], ['Bold Script', t => map(t, 0x1d4d0, 0x1d4ea)], ['Fraktur', t => map(t, 0x1d504, 0x1d51e, undefined, {
+  C: 0x212d,
+  H: 0x210c,
+  I: 0x2111,
+  R: 0x211c,
+  Z: 0x2128
+})], ['Bold Fraktur', t => map(t, 0x1d56c, 0x1d586)], ['Double Struck', t => map(t, 0x1d538, 0x1d552, 0x1d7d8, {
+  C: 0x2102,
+  H: 0x210d,
+  N: 0x2115,
+  P: 0x2119,
+  Q: 0x211a,
+  R: 0x211d,
+  Z: 0x2124
+})], ['Monospace', t => map(t, 0x1d670, 0x1d68a, 0x1d7f6)], ['Sans', t => map(t, 0x1d5a0, 0x1d5ba, 0x1d7e2)], ['Sans Bold', t => map(t, 0x1d5d4, 0x1d5ee, 0x1d7ec)], ['Sans Italic', t => map(t, 0x1d608, 0x1d622)], ['Sans Bold Italic', t => map(t, 0x1d63c, 0x1d656)], ['Circled', t => map(t, 0x24b6, 0x24d0).replace(/[1-9]/g, d => String.fromCodePoint(0x2460 + +d - 1)).replace(/0/g, '⓪')], ['Black Circled', t => map(t.toUpperCase(), 0x1f150, 0x1f150)], ['Squared', t => map(t.toUpperCase(), 0x1f130, 0x1f130)], ['Black Squared', t => map(t.toUpperCase(), 0x1f170, 0x1f170)], ['Parenthesized', t => map(t, 0x1f110, 0x249c)], ['Full Width', t => map(t, 0xff21, 0xff41, 0xff10).replace(/ /g, '　')], ['Small Caps', t => Array.from(t.toLowerCase()).map(c => c >= 'a' && c <= 'z' ? SMALLCAPS[c.charCodeAt(0) - 97] : c).join('')], ['Superscript', t => Array.from(t.toLowerCase()).map(c => SUP[c] || c).join('')], ['Upside Down', t => Array.from(t.toLowerCase()).map(c => FLIP[c] || c).reverse().join('')], ['Strikethrough', t => Array.from(t).map(c => c + '\u0336').join('')], ['Underline', t => Array.from(t).map(c => c + '\u0332').join('')], ['Slashed', t => Array.from(t).map(c => c + '\u0338').join('')], ['Wavy', t => Array.from(t).map(c => c + '\u0330').join('')], ['Dotted', t => Array.from(t).map(c => c + '\u0307').join('')], ['Spaced', t => Array.from(t).join(' ')], ['Sparkle', t => `✨ ${t} ✨`], ['Hearts', t => `♡ ${t} ♡`], ['Stars', t => `★彡 ${t} 彡★`], ['Flowers', t => `✿ ${t} ✿`], ['Arrows', t => `➤ ${t} ◄`]];
+const makeFancy = text => FANCY.map(([name, fn]) => ({
+  id: `fancy:${name}`,
+  kind: 'text',
+  name,
+  group: 'Text Styles',
+  tags: name.toLowerCase(),
+  vb: [0, 0, 130, 130],
+  text: fn(text || 'Hello World')
+}));
+
+/* ---------------- Fonts ---------------- */
+exports.makeFancy = makeFancy;
+const FALLBACK_FONTS = [['Inter', 'sans-serif'], ['Poppins', 'sans-serif'], ['Montserrat', 'sans-serif'], ['Roboto', 'sans-serif'], ['Open Sans', 'sans-serif'], ['Lato', 'sans-serif'], ['Playfair Display', 'serif'], ['Merriweather', 'serif'], ['Lora', 'serif'], ['Bebas Neue', 'display'], ['Pacifico', 'handwriting'], ['Lobster', 'display'], ['Dancing Script', 'handwriting'], ['Caveat', 'handwriting'], ['Orbitron', 'display'], ['Press Start 2P', 'display'], ['Bungee', 'display'], ['Fredoka', 'sans-serif'], ['Righteous', 'display'], ['Abril Fatface', 'display'], ['Anton', 'sans-serif'], ['Permanent Marker', 'handwriting'], ['Space Mono', 'monospace'], ['JetBrains Mono', 'monospace'], ['Satisfy', 'handwriting'], ['Monoton', 'display'], ['Creepster', 'display'], ['Rubik Glitch', 'display'], ['Shrikhand', 'display'], ['Baloo 2', 'display']];
+const loadFonts = () => once('fonts', async () => {
+  let list = FALLBACK_FONTS;
+  try {
+    const res = await netFetch('https://api.fontsource.org/v1/fonts', {}, 2);
+    const j = await res.json();
+    const g = j.filter(f => f.type === 'google' && f.subsets?.includes('latin')).map(f => [f.family, f.category]);
+    if (g.length > 50) list = g;
+  } catch {/* offline fallback */}
+  return list.map(([family, cat]) => ({
+    id: `font:${family}`,
+    kind: 'font',
+    name: family,
+    group: cat,
+    tags: `${family} ${cat} font typeface`.toLowerCase(),
+    vb: [0, 0, 130, 130],
+    text: family,
+    font: family
+  }));
+});
+
+/* ---------------- Badge stickers (generated) ---------------- */
+exports.loadFonts = loadFonts;
+const SHAPES = {
+  burst: {
+    el: `<polygon points="${Array.from({
+      length: 32
+    }, (_, i) => {
+      const r = i % 2 ? 78 : 94;
+      const a = Math.PI * i / 16;
+      return `${(100 + r * Math.cos(a)).toFixed(1)},${(100 + r * Math.sin(a)).toFixed(1)}`;
+    }).join(' ')}"/>`,
+    tx: 100,
+    ty: 100,
+    maxw: 120
+  },
+  bubble: {
+    el: `<path d="M30 28H170Q192 28 192 50V116Q192 138 170 138H100L58 178V138H30Q8 138 8 116V50Q8 28 30 28Z"/>`,
+    tx: 100,
+    ty: 83,
+    maxw: 150
+  },
+  ribbon: {
+    el: `<path d="M8 58H192L172 100L192 142H8L28 100Z"/>`,
+    tx: 100,
+    ty: 100,
+    maxw: 130
+  },
+  circle: {
+    el: `<circle cx="100" cy="100" r="88"/>`,
+    tx: 100,
+    ty: 100,
+    maxw: 130
+  },
+  heart: {
+    el: `<path d="M100 176C20 116 8 60 54 36C80 24 100 44 100 60C100 44 120 24 146 36C192 60 180 116 100 176Z"/>`,
+    tx: 100,
+    ty: 94,
+    maxw: 100
+  },
+  cloud: {
+    el: `<circle cx="62" cy="112" r="42"/><circle cx="102" cy="82" r="48"/><circle cx="146" cy="108" r="42"/><rect x="62" y="112" width="84" height="42"/>`,
+    tx: 104,
+    ty: 108,
+    maxw: 120
+  },
+  hex: {
+    el: `<polygon points="100,10 178,55 178,145 100,190 22,145 22,55"/>`,
+    tx: 100,
+    ty: 100,
+    maxw: 112
+  },
+  tag: {
+    el: `<path d="M16 52H150L186 100L150 148H16Z"/><circle cx="36" cy="100" r="7" fill="#fff"/>`,
+    tx: 92,
+    ty: 100,
+    maxw: 112
+  },
+  star: {
+    el: `<polygon points="${Array.from({
+      length: 10
+    }, (_, i) => {
+      const r = i % 2 ? 40 : 94;
+      const a = Math.PI * i / 5 - Math.PI / 2;
+      return `${(100 + r * Math.cos(a)).toFixed(1)},${(104 + r * Math.sin(a)).toFixed(1)}`;
+    }).join(' ')}"/>`,
+    tx: 100,
+    ty: 108,
+    maxw: 70
+  }
+};
+const PALETTES = [['#FFD93D', '#1b1b1b'], ['#FF4D6D', '#ffffff'], ['#7C5CFF', '#ffffff'], ['#00C2A8', '#ffffff'], ['#FF9F1C', '#1b1b1b'], ['#3A86FF', '#ffffff']];
+const LABELS = ['WOW!', 'LOL', 'NEW', 'SALE', 'HOT', 'LOVE', 'COOL', 'BOSS', 'OK', 'HI!', 'YES', 'GO!', 'BEST', 'FUN', '100%', 'OMG'];
+const makeBadges = () => {
+  const out = [];
+  let n = 0;
+  Object.entries(SHAPES).forEach(([key, s], si) => {
+    [0, 1, 2].forEach(p => {
+      const [fill, ink] = PALETTES[(si + p * 2) % PALETTES.length];
+      const label = LABELS[n++ % LABELS.length];
+      out.push({
+        id: `badge:${key}:${p}`,
+        kind: 'sticker',
+        name: `${key} badge`,
+        group: 'Badges',
+        tags: `badge sticker ${key} ${label}`.toLowerCase(),
+        src: 'Badge Maker',
+        vb: [0, 0, 200, 200],
+        label,
+        multi: true,
+        gen: t => {
+          const txt = (t || ' ').toUpperCase();
+          const fs = Math.min(58, s.maxw / Math.max(txt.length, 2) * 1.75);
+          return `<g stroke="#161616" stroke-width="16" stroke-linejoin="round" fill="#161616">${s.el}</g><g fill="${fill}">${s.el}</g><ellipse cx="62" cy="48" rx="26" ry="9" fill="#fff" opacity=".35" transform="rotate(-28 62 48)"/><text x="${s.tx}" y="${s.ty}" font-family="'Arial Black','Impact','Arial',sans-serif" font-weight="900" font-size="${fs.toFixed(1)}" text-anchor="middle" dominant-baseline="central" fill="${ink}" transform="rotate(-6 ${s.tx} ${s.ty})">${txt.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</text>`;
+        }
+      });
+    });
+  });
+  return out;
+};
+
+/* ---------------- Iconify (online, 200k+ icons) ---------------- */
+exports.makeBadges = makeBadges;
+const ONLINE_SETS = exports.ONLINE_SETS = {
+  icon: [{
+    prefix: '',
+    label: 'All sets'
+  }, {
+    prefix: 'mdi',
+    label: 'Material Design'
+  }, {
+    prefix: 'ph',
+    label: 'Phosphor'
+  }, {
+    prefix: 'tabler',
+    label: 'Tabler'
+  }, {
+    prefix: 'fa6-solid',
+    label: 'Font Awesome'
+  }, {
+    prefix: 'heroicons',
+    label: 'Heroicons'
+  }, {
+    prefix: 'bi',
+    label: 'Bootstrap'
+  }, {
+    prefix: 'ri',
+    label: 'Remix'
+  }, {
+    prefix: 'solar',
+    label: 'Solar'
+  }, {
+    prefix: 'carbon',
+    label: 'Carbon'
+  }, {
+    prefix: 'ion',
+    label: 'Ionicons'
+  }, {
+    prefix: 'fluent',
+    label: 'Fluent'
+  }, {
+    prefix: 'flat-color-icons',
+    label: 'Flat Color'
+  }, {
+    prefix: 'fluent-color',
+    label: 'Fluent Color'
+  }, {
+    prefix: 'icon-park',
+    label: 'IconPark'
+  }, {
+    prefix: 'game-icons',
+    label: 'Game Icons'
+  }],
+  logo: [{
+    prefix: 'logos',
+    label: 'SVG Logos'
+  }, {
+    prefix: 'skill-icons',
+    label: 'Skill Icons'
+  }, {
+    prefix: 'devicon',
+    label: 'Devicon'
+  }, {
+    prefix: 'vscode-icons',
+    label: 'VS Code'
+  }, {
+    prefix: 'cryptocurrency-color',
+    label: 'Crypto'
+  }, {
+    prefix: 'flag',
+    label: 'Country Flags'
+  }, {
+    prefix: 'circle-flags',
+    label: 'Circle Flags'
+  }, {
+    prefix: 'fa6-brands',
+    label: 'FA Brands'
+  }, {
+    prefix: 'file-icons',
+    label: 'File Icons'
+  }, {
+    prefix: 'simple-icons',
+    label: 'Simple Icons'
+  }, {
+    prefix: 'cib',
+    label: 'CoreUI Brands'
+  }],
+  sticker: [{
+    prefix: 'fluent-emoji',
+    label: 'Fluent 3D'
+  }, {
+    prefix: 'fluent-emoji-flat',
+    label: 'Fluent Flat'
+  }, {
+    prefix: 'noto',
+    label: 'Noto'
+  }, {
+    prefix: 'twemoji',
+    label: 'Twemoji'
+  }, {
+    prefix: 'openmoji',
+    label: 'OpenMoji'
+  }, {
+    prefix: 'emojione',
+    label: 'EmojiOne'
+  }, {
+    prefix: 'fxemoji',
+    label: 'Firefox'
+  }, {
+    prefix: 'streamline-emoji',
+    label: 'Streamline'
+  }, {
+    prefix: 'noto-v1',
+    label: 'Noto v1'
+  }, {
+    prefix: 'emojione-v1',
+    label: 'EmojiOne v1'
+  }, {
+    prefix: 'fluent-emoji-high-contrast',
+    label: 'Fluent Mono'
+  }]
+};
+const API = 'https://api.iconify.design';
+async function fetchBodies(ids, kind) {
+  const byPrefix = new Map();
+  ids.forEach(id => {
+    const [p, n] = id.split(':');
+    byPrefix.set(p, [...(byPrefix.get(p) || []), n]);
+  });
+  const sets = new Map();
+  await Promise.all([...byPrefix.entries()].map(async ([p, names]) => {
+    try {
+      const res = await netFetch(`${API}/${p}.json?icons=${names.join(',')}`);
+      sets.set(p, await res.json());
+    } catch {/* ignore */}
+  }));
+  if (byPrefix.size && !sets.size) throw new Error('Network request failed');
+  const out = [];
+  ids.forEach(id => {
+    const [p, n] = id.split(':');
+    const set = sets.get(p);
+    let ic = set?.icons?.[n];
+    if (!ic && set?.aliases?.[n]) {
+      const al = set.aliases[n];
+      ic = {
+        ...set.icons?.[al.parent],
+        ...al
+      };
+    }
+    if (!ic || !ic.body) return;
+    const w = ic.width || set.width || 16,
+      h = ic.height || set.height || 16;
+    const left = ic.left || set.left || 0,
+      top = ic.top || set.top || 0;
+    const mono = ic.body.includes('currentColor');
+    out.push({
+      id: `iconify:${id}`,
+      kind,
+      name: words(n),
+      tags: id,
+      src: p,
+      vb: [left, top, w, h],
+      body: ic.body,
+      mono,
+      multi: !mono
+    });
+  });
+  return out;
+}
+async function searchIconify(query, prefix, start, limit, kind) {
+  const q = new URLSearchParams({
+    query,
+    limit: String(limit),
+    start: String(start)
+  });
+  if (prefix) q.set('prefixes', prefix);
+  const res = await netFetch(`${API}/search?${q}`);
+  const j = await res.json();
+  const items = await fetchBodies(j.icons || [], kind);
+  return {
+    items,
+    total: j.total || 0
+  };
+}
+const collectionCache = new Map();
+async function browseIconify(prefix, start, limit, kind) {
+  let names = collectionCache.get(prefix);
+  if (!names) {
+    const j = await (await netFetch(`${API}/collection?prefix=${prefix}`)).json();
+    names = [...new Set([...(j.uncategorized || []), ...Object.values(j.categories || {}).flat()])];
+    collectionCache.set(prefix, names);
+  }
+  const slice = names.slice(start, start + limit).map(n => `${prefix}:${n}`);
+  return {
+    items: await fetchBodies(slice, kind),
+    total: names.length
+  };
+}
+};
+__m["src/lib/render.ts"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TEXTURES = exports.EMOJI_FONT = exports.DEFAULT_STYLE = void 0;
+exports.assetBody = assetBody;
+exports.buildSvg = buildSvg;
+exports.clearMeasureCache = clearMeasureCache;
+exports.downloadBlob = downloadBlob;
+exports.ensureFont = ensureFont;
+exports.fontEmbedCss = fontEmbedCss;
+exports.hasOriginalColors = void 0;
+exports.svgToBlob = svgToBlob;
+// Core rendering engine: turns an Asset + Style into a standalone SVG string.
+
+const TEXTURES = exports.TEXTURES = [{
+  id: 'none',
+  label: 'None'
+}, {
+  id: 'noise',
+  label: 'Noise'
+}, {
+  id: 'glitter',
+  label: 'Glitter'
+}, {
+  id: 'clouds',
+  label: 'Clouds'
+}, {
+  id: 'brushed',
+  label: 'Brushed'
+}, {
+  id: 'dots',
+  label: 'Dots'
+}, {
+  id: 'halftone',
+  label: 'Halftone'
+}, {
+  id: 'stripes',
+  label: 'Stripes'
+}, {
+  id: 'lines',
+  label: 'Lines'
+}, {
+  id: 'grid',
+  label: 'Grid'
+}, {
+  id: 'checker',
+  label: 'Checker'
+}, {
+  id: 'crosshatch',
+  label: 'Hatch'
+}, {
+  id: 'zigzag',
+  label: 'Zigzag'
+}, {
+  id: 'waves',
+  label: 'Waves'
+}, {
+  id: 'stars',
+  label: 'Sparkle'
+}, {
+  id: 'scales',
+  label: 'Scales'
+}, {
+  id: 'bricks',
+  label: 'Bricks'
+}, {
+  id: 'gloss',
+  label: 'Gloss'
+}, {
+  id: 'metal',
+  label: 'Metal'
+}];
+const DEFAULT_STYLE = exports.DEFAULT_STYLE = {
+  size: 256,
+  colorMode: 'original',
+  color: '#6366f1',
+  color2: '#ec4899',
+  angle: 45,
+  texture: 'none',
+  texTarget: 'icon',
+  texColor: '#ffffff',
+  texScale: 1,
+  texOpacity: 0.5,
+  texBlend: 'normal',
+  strokeWidth: 2,
+  rotate: 0,
+  flipX: false,
+  flipY: false,
+  opacity: 1,
+  hue: 0,
+  sat: 100,
+  bright: 100,
+  outlineW: 0,
+  outlineColor: '#ffffff',
+  shadowBlur: 0,
+  shadowX: 0,
+  shadowY: 0,
+  shadowColor: '#000000',
+  shadowOpacity: 0.4,
+  glow: 0,
+  glowColor: '#22d3ee',
+  bgShape: 'none',
+  bgMode: 'solid',
+  bgColor: '#111827',
+  bgColor2: '#7c3aed',
+  bgPad: 18,
+  text: null,
+  fontFamily: '',
+  bold: false,
+  italic: false
+};
+const EMOJI_FONT = exports.EMOJI_FONT = "'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji','Twemoji Mozilla',sans-serif";
+const SYS_FONT = "'Segoe UI Symbol','Apple Symbols','Noto Sans Symbols 2','Noto Sans','DejaVu Sans',Arial,sans-serif";
+const hasOriginalColors = a => a.kind === 'emoji' || !!a.color || !!a.multi || a.kind === 'sticker';
+exports.hasOriginalColors = hasOriginalColors;
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const r2 = n => Math.round(n * 100) / 100;
+let measureCtx = null;
+const measureCache = new Map();
+function measure(text, family, bold, italic) {
+  const key = `${family}|${bold}|${italic}|${text}`;
+  const c = measureCache.get(key);
+  if (c !== undefined) return c;
+  if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d');
+  let w = text.length * 60;
+  if (measureCtx) {
+    measureCtx.font = `${italic ? 'italic ' : ''}${bold ? '700' : '400'} 100px ${family}`;
+    w = measureCtx.measureText(text).width || w;
+  }
+  measureCache.set(key, w);
+  return w;
+}
+function clearMeasureCache() {
+  measureCache.clear();
+}
+function lineGrad(id, W, H, angle, c1, c2) {
+  const a = angle * Math.PI / 180;
+  const dx = Math.cos(a),
+    dy = Math.sin(a);
+  const half = (Math.abs(W * dx) + Math.abs(H * dy)) / 2;
+  return `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${r2(W / 2 - dx * half)}" y1="${r2(H / 2 - dy * half)}" x2="${r2(W / 2 + dx * half)}" y2="${r2(H / 2 + dy * half)}"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>`;
+}
+function starPoints(cx, cy, ro, ri, n) {
+  const pts = [];
+  for (let i = 0; i < n * 2; i++) {
+    const r = i % 2 === 0 ? ro : ri;
+    const a = Math.PI * i / n - Math.PI / 2;
+    pts.push(`${r2(cx + r * Math.cos(a))},${r2(cy + r * Math.sin(a))}`);
+  }
+  return pts.join(' ');
+}
+function hexPoints(cx, cy, R) {
+  return [0, 1, 2, 3, 4, 5].map(i => {
+    const a = Math.PI / 3 * i - Math.PI / 2;
+    return `${r2(cx + R * Math.cos(a))},${r2(cy + R * Math.sin(a))}`;
+  }).join(' ');
+}
+function bgShapeEl(shape, x, y, S, fill) {
+  const cx = x + S / 2,
+    cy = y + S / 2;
+  switch (shape) {
+    case 'circle':
+      return `<circle cx="${cx}" cy="${cy}" r="${S / 2}" fill="${fill}"/>`;
+    case 'square':
+      return `<rect x="${x}" y="${y}" width="${S}" height="${S}" fill="${fill}"/>`;
+    case 'rounded':
+      return `<rect x="${x}" y="${y}" width="${S}" height="${S}" rx="${S * 0.18}" fill="${fill}"/>`;
+    case 'squircle':
+      return `<rect x="${x}" y="${y}" width="${S}" height="${S}" rx="${S * 0.32}" fill="${fill}"/>`;
+    case 'hexagon':
+      return `<polygon points="${hexPoints(cx, cy, S / 2)}" fill="${fill}" stroke="${fill}" stroke-width="0.5"/>`;
+    case 'burst':
+      return `<polygon points="${starPoints(cx, cy, S / 2, S / 2 - S * 0.07, 14)}" fill="${fill}"/>`;
+    default:
+      return '';
+  }
+}
+function hex2n(hex) {
+  let h = (hex || '#000000').replace('#', '');
+  if (h.length === 3) h = h.split('').map(c => c + c).join('');
+  const n = parseInt(h || '000000', 16) || 0;
+  return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255].map(v => v.toFixed(3));
+}
+function textureDef(id, tex, color, scale, W, H) {
+  const s = scale;
+  const pat = (w, h, inner, extra = '') => `<pattern id="${id}" patternUnits="userSpaceOnUse" width="${w}" height="${h}" patternTransform="scale(${s}) ${extra}">${inner}</pattern>`;
+  const stroke = `fill="none" stroke="${color}"`;
+  const [cr, cg, cb] = hex2n(color);
+  const noise = (freq, oct, row, seed = 3) => `<filter id="${id}f" x="0" y="0" width="${W}" height="${H}" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="${freq}" numOctaves="${oct}" seed="${seed}" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 ${cr} 0 0 0 0 ${cg} 0 0 0 0 ${cb} ${row}"/></filter>`;
+  switch (tex) {
+    case 'dots':
+      return {
+        defs: pat(16, 16, `<circle cx="8" cy="8" r="3" fill="${color}"/>`),
+        fill: id
+      };
+    case 'halftone':
+      return {
+        defs: pat(14, 14, `<circle cx="7" cy="7" r="4.5" fill="${color}"/><circle cx="0" cy="0" r="2" fill="${color}"/><circle cx="14" cy="14" r="2" fill="${color}"/><circle cx="0" cy="14" r="2" fill="${color}"/><circle cx="14" cy="0" r="2" fill="${color}"/>`),
+        fill: id
+      };
+    case 'stripes':
+      return {
+        defs: pat(16, 16, `<rect width="16" height="8" fill="${color}"/>`, 'rotate(45)'),
+        fill: id
+      };
+    case 'lines':
+      return {
+        defs: pat(12, 12, `<rect width="12" height="3" fill="${color}"/>`),
+        fill: id
+      };
+    case 'grid':
+      return {
+        defs: pat(16, 16, `<path d="M16 0H0V16" ${stroke} stroke-width="1.6"/>`),
+        fill: id
+      };
+    case 'checker':
+      return {
+        defs: pat(32, 32, `<rect width="16" height="16" fill="${color}"/><rect x="16" y="16" width="16" height="16" fill="${color}"/>`),
+        fill: id
+      };
+    case 'crosshatch':
+      return {
+        defs: pat(12, 12, `<path d="M0 0L12 12M12 0L0 12" ${stroke} stroke-width="1.4"/>`),
+        fill: id
+      };
+    case 'zigzag':
+      return {
+        defs: pat(24, 16, `<path d="M0 12L6 4L12 12L18 4L24 12" ${stroke} stroke-width="2.2"/>`),
+        fill: id
+      };
+    case 'waves':
+      return {
+        defs: pat(32, 16, `<path d="M0 8Q8 -2 16 8T32 8" ${stroke} stroke-width="2.2"/>`),
+        fill: id
+      };
+    case 'stars':
+      return {
+        defs: pat(40, 40, `<path d="M10 2L12 8L18 10L12 12L10 18L8 12L2 10L8 8Z" fill="${color}"/><path d="M30 24L31.4 28.6L36 30L31.4 31.4L30 36L28.6 31.4L24 30L28.6 28.6Z" fill="${color}"/>`),
+        fill: id
+      };
+    case 'scales':
+      return {
+        defs: pat(20, 20, `<path d="M0 20A10 10 0 0 1 20 20M-10 10A10 10 0 0 1 10 10M10 10A10 10 0 0 1 30 10" ${stroke} stroke-width="1.6"/>`),
+        fill: id
+      };
+    case 'bricks':
+      return {
+        defs: pat(40, 20, `<path d="M0 0H40M0 10H40M20 0V10M0 10V20M40 10V20" ${stroke} stroke-width="1.6"/>`),
+        fill: id
+      };
+    case 'noise':
+      return {
+        defs: noise(`${0.9 / s}`, 2, '2 0 0 0 -0.45'),
+        fill: '',
+        filter: `${id}f`
+      };
+    case 'glitter':
+      return {
+        defs: noise(`${0.8 / s}`, 1, '22 0 0 0 -15.5', 7),
+        fill: '',
+        filter: `${id}f`
+      };
+    case 'clouds':
+      return {
+        defs: noise(`${0.012 / s}`, 5, '2.4 0 0 0 -0.85', 11),
+        fill: '',
+        filter: `${id}f`
+      };
+    case 'brushed':
+      return {
+        defs: noise(`${0.004 / s} ${0.7 / s}`, 2, '2.2 0 0 0 -0.55', 5),
+        fill: '',
+        filter: `${id}f`
+      };
+    case 'gloss':
+      return {
+        defs: `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${r2(W * 0.35)}" y2="${H}"><stop offset="0" stop-color="${color}" stop-opacity="1"/><stop offset="0.5" stop-color="${color}" stop-opacity="0.15"/><stop offset="0.5" stop-color="${color}" stop-opacity="0"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></linearGradient>`,
+        fill: id
+      };
+    case 'metal':
+      return {
+        defs: `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${W}" y2="${H}"><stop offset="0" stop-color="${color}" stop-opacity=".9"/><stop offset=".18" stop-color="#000" stop-opacity=".35"/><stop offset=".38" stop-color="${color}" stop-opacity=".85"/><stop offset=".6" stop-color="#000" stop-opacity=".3"/><stop offset=".8" stop-color="${color}" stop-opacity=".8"/><stop offset="1" stop-color="#000" stop-opacity=".4"/></linearGradient>`,
+        fill: id
+      };
+    default:
+      return {
+        defs: '',
+        fill: ''
+      };
+  }
+}
+function assetBody(asset, st) {
+  if (asset.gen) {
+    return {
+      vb: asset.vb,
+      body: asset.gen(st.text ?? asset.label ?? '')
+    };
+  }
+  if (asset.text !== undefined) {
+    const text = asset.kind === 'font' ? (st.text ?? asset.text) || ' ' : asset.text || ' ';
+    const family = asset.kind === 'emoji' ? EMOJI_FONT : asset.kind === 'font' ? `'${(st.fontFamily || asset.font || 'Inter').replace(/'/g, '')}',sans-serif` : st.fontFamily ? `'${st.fontFamily.replace(/'/g, '')}',${SYS_FONT}` : SYS_FONT;
+    const lines = text.split('\n');
+    const widths = lines.map(l => measure(l, family, st.bold, st.italic));
+    const ww = Math.max(Math.max(...widths) + 30, 130);
+    const lh = 118;
+    const hh = Math.max(lines.length * lh + 14, 130);
+    const tspans = lines.map((l, i) => `<text x="${r2(ww / 2)}" y="${r2(hh / 2 + (i - (lines.length - 1) / 2) * lh)}" font-family="${family}" font-size="100" font-weight="${st.bold ? 700 : 400}" font-style="${st.italic ? 'italic' : 'normal'}" text-anchor="middle" dominant-baseline="central" fill="currentColor" xml:space="preserve">${esc(l)}</text>`).join('');
+    return {
+      vb: [0, 0, r2(ww), r2(hh)],
+      body: tspans
+    };
+  }
+  if (asset.stroke) {
+    return {
+      vb: asset.vb,
+      body: `<g fill="none" stroke="currentColor" stroke-width="${st.strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${asset.body}</g>`
+    };
+  }
+  return {
+    vb: asset.vb,
+    body: asset.body || ''
+  };
+}
+function buildSvg(asset, st, opts = {}) {
+  const uid = opts.uid || 'a';
+  const {
+    vb,
+    body
+  } = assetBody(asset, st);
+  const [vx, vy, vw, vh] = vb;
+  const U = 512;
+  const k = U / Math.max(vw, vh);
+  const cw = vw * k,
+    ch = vh * k;
+  const original = st.colorMode === 'original' && hasOriginalColors(asset);
+  const isMonoSolid = !!asset.mono || asset.kind === 'symbol' || asset.kind === 'font' || asset.kind === 'text';
+  const baseColor = asset.color || '#111111';
+  const hasBg = st.bgShape !== 'none';
+  const th = st.rotate * Math.PI / 180;
+  const rw = Math.abs(cw * Math.cos(th)) + Math.abs(ch * Math.sin(th));
+  const rh = Math.abs(cw * Math.sin(th)) + Math.abs(ch * Math.cos(th));
+  const padU = hasBg ? U * st.bgPad / 100 : 0;
+  let W0 = rw + padU * 2;
+  let H0 = rh + padU * 2;
+  if (hasBg) {
+    const S = Math.max(W0, H0);
+    W0 = S;
+    H0 = S;
+  }
+  const margin = st.outlineW + st.glow * 2.2 + st.shadowBlur * 2 + Math.max(Math.abs(st.shadowX), Math.abs(st.shadowY)) + 2;
+  const W = r2(W0 + margin * 2),
+    H = r2(H0 + margin * 2);
+  const cx = W / 2,
+    cy = H / 2;
+  const T = `translate(${r2(cx)} ${r2(cy)}) rotate(${st.rotate}) scale(${r2((st.flipX ? -1 : 1) * k)} ${r2((st.flipY ? -1 : 1) * k)}) translate(${r2(-(vx + vw / 2))} ${r2(-(vy + vh / 2))})`;
+  let defs = '';
+  let bgSvg = '';
+  if (hasBg) {
+    let fill = st.bgColor;
+    if (st.bgMode === 'gradient') {
+      defs += lineGrad(`${uid}bg`, W, H, st.angle, st.bgColor, st.bgColor2);
+      fill = `url(#${uid}bg)`;
+    }
+    bgSvg = bgShapeEl(st.bgShape, margin, margin, W0, fill);
+  }
+  const maskAttrs = `maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}" style="mask-type:alpha"`;
+  const contentG = color => `<g transform="${T}" color="${color}">${body}</g>`;
+  let maskDefined = false;
+  const iconMask = () => {
+    if (!maskDefined) {
+      defs += `<mask id="${uid}m" ${maskAttrs}>${contentG('#000')}</mask>`;
+      maskDefined = true;
+    }
+  };
+  let content = '';
+  if (original) {
+    content = contentG(baseColor);
+  } else if (st.colorMode !== 'gradient' && (isMonoSolid || !hasOriginalColors(asset))) {
+    content = contentG(st.color);
+  } else if (st.colorMode !== 'gradient') {
+    iconMask();
+    content = `<rect width="${W}" height="${H}" fill="${st.color}" mask="url(#${uid}m)"/>`;
+  } else {
+    defs += lineGrad(`${uid}g`, W, H, st.angle, st.color, st.color2);
+    iconMask();
+    content = `<rect width="${W}" height="${H}" fill="url(#${uid}g)" mask="url(#${uid}m)"/>`;
+  }
+  let bgTex = '';
+  let iconTex = '';
+  if (st.texture !== 'none' && !opts.plain) {
+    const t = textureDef(`${uid}t`, st.texture, st.texColor, st.texScale, W, H);
+    defs += t.defs;
+    const target = hasBg ? st.texTarget : 'icon';
+    const rect = `<rect width="${W}" height="${H}" ${t.filter ? `filter="url(#${t.filter})"` : `fill="url(#${t.fill})"`} opacity="${st.texOpacity}"/>`;
+    const blend = st.texBlend !== 'normal' ? `mix-blend-mode:${st.texBlend}` : '';
+    if (target === 'icon' || target === 'both') {
+      iconMask();
+      iconTex = `<g mask="url(#${uid}m)" style="${blend}">${rect}</g>`;
+    }
+    if (target === 'bg' || target === 'both') {
+      defs += `<mask id="${uid}mb" ${maskAttrs}>${bgShapeEl(st.bgShape, margin, margin, W0, '#000')}</mask>`;
+      bgTex = `<g mask="url(#${uid}mb)" style="${blend}">${rect}</g>`;
+    }
+  }
+  const colorFilter = original && !opts.plain && (st.hue !== 0 || st.sat !== 100 || st.bright !== 100) ? ` style="filter:hue-rotate(${st.hue}deg) saturate(${st.sat}%) brightness(${st.bright}%)"` : '';
+  const inner = bgSvg + bgTex + `<g${colorFilter}>${content}</g>` + iconTex;
+  let fx = '';
+  if (!opts.plain && (st.outlineW > 0 || st.glow > 0 || st.shadowBlur > 0 || st.shadowX !== 0 || st.shadowY !== 0)) {
+    let cur = 'SourceGraphic';
+    let f = '';
+    if (st.outlineW > 0) {
+      f += `<feGaussianBlur in="SourceAlpha" stdDeviation="${r2(st.outlineW / 1.8)}" result="ob"/><feComponentTransfer in="ob" result="oh"><feFuncA type="linear" slope="9" intercept="-0.4"/></feComponentTransfer><feFlood flood-color="${st.outlineColor}"/><feComposite in2="oh" operator="in" result="oc"/><feMerge result="o1"><feMergeNode in="oc"/><feMergeNode in="SourceGraphic"/></feMerge>`;
+      cur = 'o1';
+    }
+    if (st.glow > 0) {
+      f += `<feGaussianBlur in="${cur}" stdDeviation="${st.glow}" result="gb"/><feFlood flood-color="${st.glowColor}"/><feComposite in2="gb" operator="in" result="gc"/><feMerge result="g1"><feMergeNode in="gc"/><feMergeNode in="gc"/><feMergeNode in="${cur}"/></feMerge>`;
+      cur = 'g1';
+    }
+    if (st.shadowBlur > 0 || st.shadowX !== 0 || st.shadowY !== 0) {
+      f += `<feDropShadow in="${cur}" dx="${st.shadowX}" dy="${st.shadowY}" stdDeviation="${st.shadowBlur}" flood-color="${st.shadowColor}" flood-opacity="${st.shadowOpacity}"/>`;
+    }
+    defs += `<filter id="${uid}fx" filterUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}" color-interpolation-filters="sRGB">${f}</filter>`;
+    fx = ` filter="url(#${uid}fx)"`;
+  }
+  const group = `<g${fx}${st.opacity < 1 ? ` opacity="${st.opacity}"` : ''} style="isolation:isolate">${inner}</g>`;
+  const maxd = Math.max(W, H);
+  const size = opts.forceSize || st.size;
+  const w = Math.max(1, Math.round(W / maxd * size)),
+    h = Math.max(1, Math.round(H / maxd * size));
+  const style = opts.fontCss ? `<style>${opts.fontCss}</style>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${w}" height="${h}"><defs>${style}${defs}</defs>${group}</svg>`;
+  return {
+    svg,
+    w,
+    h
+  };
+}
+
+/* ---------- Export helpers ---------- */
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+async function svgToBlob(svg, w, h, type, bg) {
+  const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  const img = new Image();
+  await new Promise((res, rej) => {
+    img.onload = () => res();
+    img.onerror = () => rej(new Error('render failed'));
+    img.src = url;
+  });
+  const c = document.createElement('canvas');
+  c.width = w;
+  c.height = h;
+  const ctx = c.getContext('2d');
+  if (bg || type === 'image/jpeg') {
+    ctx.fillStyle = bg || '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+  }
+  ctx.drawImage(img, 0, 0, w, h);
+  return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('encode failed')), type, 0.95));
+}
+const fontLinks = new Set();
+function ensureFont(family) {
+  if (!family) return Promise.resolve();
+  if (!fontLinks.has(family)) {
+    fontLinks.add(family);
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family).replace(/%20/g, '+')}&display=swap`;
+    document.head.appendChild(l);
+  }
+  return document.fonts.load(`100px "${family}"`).then(() => undefined).catch(() => undefined);
+}
+async function fontEmbedCss(family, text) {
+  try {
+    const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family).replace(/%20/g, '+')}&text=${encodeURIComponent(text)}`;
+    let css = await (await netFetch(url, {}, 2)).text();
+    const urls = [...css.matchAll(/url\((https:[^)]+)\)/g)].map(m => m[1]);
+    for (const u of urls) {
+      const buf = await (await netFetch(u, {}, 2)).arrayBuffer();
+      let bin = '';
+      const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+      css = css.replace(u, `data:font/woff2;base64,${btoa(bin)}`);
+    }
+    return css;
+  } catch {
+    return '';
+  }
+}
+};
+__m["src/components/ui.tsx"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ColorRow = ColorRow;
+exports.Ico = Ico;
+exports.Logo = Logo;
+exports.Section = Section;
+exports.Seg = Seg;
+exports.Slider = Slider;
+exports.ThemeSwitcher = ThemeSwitcher;
+exports.Toggle = Toggle;
+var _react = __r("ext:react");
+var _themes = __r("src/lib/themes.ts");
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+const P = {
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
+  copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  arrow: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  sparkles: '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>',
+  palette: '<circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.5-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7H16c3.3 0 6-2.7 6-6 0-4.9-4.5-8.4-10-8.4z"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  smile: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/>',
+  type: '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/>',
+  star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  sliders: '<line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/>',
+  hash: '<line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/>',
+  sticker: '<path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"/><path d="M15 3v6h6"/>',
+  award: '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+  shapes: '<path d="M8.3 10a.7.7 0 0 1-.626-1.079L11.4 3a.7.7 0 0 1 1.198-.043L16.3 8.9a.7.7 0 0 1-.572 1.1Z"/><rect x="3" y="14" width="7" height="7" rx="1"/><circle cx="17.5" cy="17.5" r="3.5"/>',
+  home: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  reset: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  shuffle: '<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>',
+  zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  layers: '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
+  devices: '<path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M7 19h5"/><path d="M10 15v4"/><rect width="6" height="10" x="16" y="12" rx="2"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  image: '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+  wand: '<path d="m15 4 5 5"/><path d="M3 21 15.5 8.5"/><path d="M18 2v3"/><path d="M21 5h-3"/><path d="M9 3v2"/><path d="M10 4H8"/>'
+};
+function Ico({
+  n,
+  s = 18,
+  className = ''
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("svg", {
+    width: s,
+    height: s,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    className: className,
+    "aria-hidden": true,
+    dangerouslySetInnerHTML: {
+      __html: P[n] || ''
+    }
+  });
+}
+function Slider({
+  label,
+  value,
+  min,
+  max,
+  step = 1,
+  onChange,
+  unit = ''
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+    className: "block",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: "flex items-center justify-between text-xs mb-0.5",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "muted font-medium",
+        children: label
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+        className: "font-semibold tabular-nums",
+        children: [Math.round(value * 100) / 100, unit]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      type: "range",
+      min: min,
+      max: max,
+      step: step,
+      value: value,
+      onChange: e => onChange(+e.target.value)
+    })]
+  });
+}
+function ColorRow({
+  label,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+    className: "flex items-center gap-2.5 text-xs",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+      type: "color",
+      value: value,
+      onChange: e => onChange(e.target.value)
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: "muted font-medium flex-1",
+      children: label
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: "font-mono text-[11px] uppercase",
+      children: value
+    })]
+  });
+}
+function Seg({
+  value,
+  options,
+  onChange
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: "flex flex-wrap gap-1.5",
+    children: options.map(o => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: `chip ${value === o.id ? 'on' : ''}`,
+      onClick: () => onChange(o.id),
+      children: o.label
+    }, o.id))
+  });
+}
+function Toggle({
+  label,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+    className: `chip ${value ? 'on' : ''}`,
+    onClick: () => onChange(!value),
+    "aria-pressed": value,
+    children: label
+  });
+}
+function Section({
+  title,
+  icon,
+  open: o = false,
+  children
+}) {
+  const [open, setOpen] = (0, _react.useState)(o);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: "inset overflow-hidden",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+      onClick: () => setOpen(!open),
+      className: "w-full flex items-center gap-2 px-3.5 py-3 text-sm font-bold cursor-pointer",
+      style: {
+        color: 'var(--fg)'
+      },
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(Ico, {
+        n: icon,
+        s: 16
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "flex-1 text-left",
+        children: title
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Ico, {
+        n: "chevron",
+        s: 16,
+        className: `transition-transform ${open ? 'rotate-180' : ''}`
+      })]
+    }), open && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: "px-3.5 pb-3.5 pt-1 space-y-3.5 pop-in",
+      children: children
+    })]
+  });
+}
+function ThemeSwitcher({
+  theme,
+  setTheme,
+  compact = false
+}) {
+  const [open, setOpen] = (0, _react.useState)(false);
+  const ref = (0, _react.useRef)(null);
+  (0, _react.useEffect)(() => {
+    const h = e => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', h);
+    return () => document.removeEventListener('mousedown', h);
+  }, []);
+  const cur = _themes.THEMES.find(t => t.id === theme);
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: "relative",
+    ref: ref,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+      className: "btn",
+      onClick: () => setOpen(!open),
+      "aria-label": "Change theme",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "w-4 h-4 rounded-full border border-black/20 shrink-0",
+        style: {
+          background: `linear-gradient(135deg,${cur.dot[0]},${cur.dot[1]})`
+        }
+      }), !compact && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "hidden sm:inline",
+        children: cur.name
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(Ico, {
+        n: "palette",
+        s: 16
+      })]
+    }), open && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: "card absolute right-0 mt-3 w-[min(92vw,22rem)] p-3 z-50 pop-in",
+      style: {
+        background: 'var(--surface)'
+      },
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "sec-title px-1 pb-2",
+        children: "Choose a theme"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "grid grid-cols-2 gap-2 max-h-[60vh] overflow-auto thin-scroll p-1",
+        children: _themes.THEMES.map(t => /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          onClick: () => {
+            setTheme(t.id);
+            setOpen(false);
+          },
+          className: `tile text-left p-2.5 flex items-center gap-2.5 ${t.id === theme ? 'sel' : ''}`,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "w-7 h-7 rounded-full shrink-0 border border-black/20",
+            style: {
+              background: `linear-gradient(135deg,${t.dot[0]},${t.dot[1]})`
+            }
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+            className: "min-w-0",
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              className: "block text-[13px] font-bold truncate",
+              children: t.name
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              className: "block text-[11px] muted truncate",
+              children: t.tag
+            })]
+          })]
+        }, t.id))
+      })]
+    })]
+  });
+}
+function Logo({
+  size = 34
+}) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 48 48",
+    "aria-hidden": true,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("defs", {
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("linearGradient", {
+        id: "lg1",
+        x1: "0",
+        y1: "0",
+        x2: "1",
+        y2: "1",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("stop", {
+          offset: "0",
+          stopColor: "#7c5cff"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("stop", {
+          offset: "1",
+          stopColor: "#22d3ee"
+        })]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("linearGradient", {
+        id: "lg2",
+        x1: "0",
+        y1: "1",
+        x2: "1",
+        y2: "0",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("stop", {
+          offset: "0",
+          stopColor: "#ff4d8d"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("stop", {
+          offset: "1",
+          stopColor: "#ffb84d"
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
+      x: "4",
+      y: "4",
+      width: "40",
+      height: "40",
+      rx: "12",
+      fill: "url(#lg1)"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("circle", {
+      cx: "19",
+      cy: "19",
+      r: "7",
+      fill: "#fff",
+      opacity: ".95"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("rect", {
+      x: "25",
+      y: "25",
+      width: "12",
+      height: "12",
+      rx: "3",
+      fill: "url(#lg2)"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("path", {
+      d: "M12 36 L19 28 L24 33",
+      stroke: "#fff",
+      strokeWidth: "3",
+      fill: "none",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      opacity: ".9"
+    })]
+  });
+}
+};
+__m["src/components/Customizer.tsx"]=function(module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Customizer;
+var _react = __r("ext:react");
+var _render = __r("src/lib/render.ts");
+var _ui = __r("src/components/ui.tsx");
+var _jsxRuntime = __r("ext:react/jsx-runtime");
+const SWATCHES = ['#111827', '#ffffff', '#ef4444', '#f97316', '#facc15', '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6', '#6366f1', '#a855f7', '#ec4899'];
+const STAGES = [{
+  id: 'plate',
+  label: 'Light'
+}, {
+  id: 'dark',
+  label: 'Dark'
+}, {
+  id: 'checker',
+  label: 'Checker'
+}, {
+  id: 'color',
+  label: 'Color'
+}];
+const FONT_PICKS = ['', 'Inter', 'Poppins', 'Playfair Display', 'Bebas Neue', 'Pacifico', 'Orbitron', 'Press Start 2P', 'Bungee', 'Caveat', 'Lobster', 'Space Mono'];
+const PRESETS = [{
+  name: 'Original',
+  emoji: '↺',
+  p: {}
+}, {
+  name: 'Sticker',
+  emoji: '🏷️',
+  p: {
+    outlineW: 16,
+    outlineColor: '#ffffff',
+    shadowBlur: 7,
+    shadowY: 7,
+    shadowOpacity: 0.35
+  }
+}, {
+  name: 'Neon',
+  emoji: '💡',
+  p: {
+    colorMode: 'solid',
+    color: '#22d3ee',
+    glow: 9,
+    glowColor: '#22d3ee',
+    bgShape: 'squircle',
+    bgColor: '#070b18',
+    bgMode: 'solid'
+  }
+}, {
+  name: 'Gold',
+  emoji: '🥇',
+  p: {
+    colorMode: 'gradient',
+    color: '#fde68a',
+    color2: '#b45309',
+    angle: 90,
+    texture: 'metal',
+    texColor: '#ffffff',
+    texOpacity: 0.55,
+    shadowBlur: 5,
+    shadowY: 6
+  }
+}, {
+  name: 'Chrome',
+  emoji: '🪞',
+  p: {
+    colorMode: 'gradient',
+    color: '#f3f4f6',
+    color2: '#6b7280',
+    angle: 90,
+    texture: 'gloss',
+    texColor: '#ffffff',
+    texOpacity: 0.9,
+    shadowBlur: 5,
+    shadowY: 6
+  }
+}, {
+  name: 'Candy',
+  emoji: '🍬',
+  p: {
+    colorMode: 'gradient',
+    color: '#ff5ea8',
+    color2: '#ffb86b',
+    angle: 135,
+    outlineW: 12,
+    outlineColor: '#ffffff',
+    shadowBlur: 6,
+    shadowY: 6,
+    texture: 'dots',
+    texOpacity: 0.25
+  }
+}, {
+  name: 'App icon',
+  emoji: '📱',
+  p: {
+    colorMode: 'solid',
+    color: '#ffffff',
+    bgShape: 'squircle',
+    bgMode: 'gradient',
+    bgColor: '#7c5cff',
+    bgColor2: '#22d3ee',
+    bgPad: 22,
+    texture: 'gloss',
+    texTarget: 'bg',
+    texOpacity: 0.5,
+    shadowBlur: 10,
+    shadowY: 10
+  }
+}, {
+  name: 'Retro',
+  emoji: '📼',
+  p: {
+    colorMode: 'solid',
+    color: '#ff6b6b',
+    texture: 'halftone',
+    texColor: '#1b1b1b',
+    texOpacity: 0.55,
+    outlineW: 8,
+    outlineColor: '#1b1b1b',
+    shadowX: 8,
+    shadowY: 8,
+    shadowOpacity: 1,
+    shadowColor: '#1b1b1b'
+  }
+}, {
+  name: 'Glitter',
+  emoji: '✨',
+  p: {
+    colorMode: 'gradient',
+    color: '#f472b6',
+    color2: '#8b5cf6',
+    angle: 120,
+    texture: 'glitter',
+    texColor: '#ffffff',
+    texOpacity: 0.95,
+    glow: 5,
+    glowColor: '#f0abfc'
+  }
+}, {
+  name: 'Grain',
+  emoji: '🎞️',
+  p: {
+    colorMode: 'solid',
+    color: '#f97316',
+    texture: 'noise',
+    texColor: '#000000',
+    texOpacity: 0.45
+  }
+}, {
+  name: 'Denim',
+  emoji: '👖',
+  p: {
+    colorMode: 'solid',
+    color: '#3b6fb6',
+    texture: 'crosshatch',
+    texColor: '#ffffff',
+    texOpacity: 0.3,
+    outlineW: 6,
+    outlineColor: '#f5d98b'
+  }
+}, {
+  name: 'Badge',
+  emoji: '🔵',
+  p: {
+    bgShape: 'circle',
+    bgMode: 'solid',
+    bgColor: '#ffffff',
+    bgPad: 20,
+    outlineW: 12,
+    outlineColor: '#111827',
+    shadowBlur: 5,
+    shadowY: 5
+  }
+}];
+function Customizer({
+  asset,
+  st,
+  patch,
+  reset,
+  onClose
+}) {
+  const [stage, setStage] = (0, _react.useState)('plate');
+  const [stageColor, setStageColor] = (0, _react.useState)('#e9d5ff');
+  const [exportPx, setExportPx] = (0, _react.useState)(0);
+  const [msg, setMsg] = (0, _react.useState)('');
+  const [busy, setBusy] = (0, _react.useState)(false);
+  const [tick, setTick] = (0, _react.useState)(0);
+  const orig = (0, _render.hasOriginalColors)(asset);
+  const fam = asset.kind === 'font' ? st.fontFamily || asset.font || '' : asset.text !== undefined ? st.fontFamily : '';
+  const isText = asset.text !== undefined && asset.kind !== 'emoji';
+  const editable = !!asset.gen || asset.kind === 'font';
+  (0, _react.useEffect)(() => {
+    if (!fam) return;
+    let live = true;
+    (0, _render.ensureFont)(fam).then(() => {
+      if (live) {
+        (0, _render.clearMeasureCache)();
+        setTick(t => t + 1);
+      }
+    });
+    return () => {
+      live = false;
+    };
+  }, [fam]);
+  const built = (0, _react.useMemo)(() => (0, _render.buildSvg)(asset, st, {
+    uid: 'pv'
+  }), [asset, st, tick]);
+  const flash = m => {
+    setMsg(m);
+    setTimeout(() => setMsg(''), 1600);
+  };
+  const usedText = asset.gen ? '' : asset.kind === 'font' ? st.text ?? asset.text ?? '' : asset.text ?? '';
+  const exportSvg = async px => {
+    let fontCss = '';
+    if (fam) fontCss = await (0, _render.fontEmbedCss)(fam, usedText || 'Aa');
+    return (0, _render.buildSvg)(asset, st, {
+      uid: 'ex',
+      fontCss,
+      forceSize: px
+    });
+  };
+  const fname = asset.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'asset';
+  const run = async fn => {
+    setBusy(true);
+    try {
+      await fn();
+    } catch (e) {
+      flash('Export failed');
+    } finally {
+      setBusy(false);
+    }
+  };
+  const dlSvg = () => run(async () => {
+    const b = await exportSvg();
+    (0, _render.downloadBlob)(new Blob([b.svg], {
+      type: 'image/svg+xml'
+    }), `${fname}.svg`);
+    flash('SVG downloaded');
+  });
+  const dlRaster = (type, ext) => run(async () => {
+    const b = await exportSvg(exportPx || st.size);
+    const blob = await (0, _render.svgToBlob)(b.svg, b.w, b.h, type);
+    (0, _render.downloadBlob)(blob, `${fname}.${ext}`);
+    flash(`${ext.toUpperCase()} downloaded`);
+  });
+  const copySvg = () => run(async () => {
+    const b = await exportSvg();
+    await navigator.clipboard.writeText(b.svg);
+    flash('SVG code copied');
+  });
+  const copyPng = () => run(async () => {
+    const b = await exportSvg(exportPx || st.size);
+    const blob = await (0, _render.svgToBlob)(b.svg, b.w, b.h, 'image/png');
+    await navigator.clipboard.write([new ClipboardItem({
+      'image/png': blob
+    })]);
+    flash('PNG copied');
+  });
+  const copyChar = async () => {
+    await navigator.clipboard.writeText(asset.text || '');
+    flash('Copied!');
+  };
+  const applyPreset = p => {
+    const keep = {
+      size: st.size,
+      text: st.text,
+      fontFamily: st.fontFamily,
+      bold: st.bold,
+      italic: st.italic,
+      strokeWidth: st.strokeWidth
+    };
+    const next = {
+      ..._render.DEFAULT_STYLE,
+      ...keep,
+      ...p
+    };
+    // original-colour assets keep their colours unless preset tints them
+    patch(next);
+  };
+  const stageStyle = stage === 'dark' ? {
+    background: '#0b0f1a'
+  } : stage === 'color' ? {
+    background: stageColor
+  } : stage === 'plate' ? {} : {};
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    className: "flex flex-col gap-3.5",
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: "flex items-center gap-2",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "min-w-0 flex-1",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "font-display text-lg leading-tight truncate",
+          title: asset.name,
+          children: asset.name
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: "text-xs muted truncate",
+          children: [asset.kind.toUpperCase(), asset.src ? ` · ${asset.src}` : '', asset.group ? ` · ${asset.group}` : '']
+        })]
+      }), onClose && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: "btn !p-2.5 lg:hidden",
+        onClick: onClose,
+        "aria-label": "Close",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "x"
+        })
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: `relative rounded-[var(--radius-sm)] overflow-hidden flex items-center justify-center h-64 sm:h-72 ${stage === 'checker' ? 'checker' : stage === 'plate' ? 'plate' : ''}`,
+      style: {
+        ...stageStyle,
+        boxShadow: 'var(--inset-shadow)'
+      },
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        style: {
+          width: built.w,
+          height: built.h,
+          maxWidth: '92%',
+          maxHeight: '92%'
+        },
+        className: "transition-all duration-200",
+        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "w-full h-full [&>svg]:w-full [&>svg]:h-full pop-in",
+          dangerouslySetInnerHTML: {
+            __html: built.svg
+          }
+        })
+      }, asset.id), /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+        className: "absolute bottom-2 right-2 text-[10px] px-2 py-0.5 rounded-full bg-black/55 text-white font-mono",
+        children: [built.w, "\xD7", built.h, "px"]
+      }), msg && /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+        className: "absolute top-2 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-black/80 text-white pop-in flex items-center gap-1",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "check",
+          s: 13
+        }), msg]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: "flex items-center gap-1.5 flex-wrap",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "text-xs muted font-semibold mr-1",
+        children: "Stage"
+      }), STAGES.map(s => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: `chip ${stage === s.id ? 'on' : ''}`,
+        onClick: () => setStage(s.id),
+        children: s.label
+      }, s.id)), stage === 'color' && /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+        type: "color",
+        value: stageColor,
+        onChange: e => setStageColor(e.target.value)
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+      className: "grid grid-cols-2 gap-2",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+        className: "btn btn-primary",
+        disabled: busy,
+        onClick: dlSvg,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "download",
+          s: 16
+        }), "SVG"]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+        className: "btn btn-primary",
+        disabled: busy,
+        onClick: () => dlRaster('image/png', 'png'),
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "download",
+          s: 16
+        }), "PNG"]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+        className: "btn",
+        disabled: busy,
+        onClick: copySvg,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "copy",
+          s: 16
+        }), "Copy SVG"]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+        className: "btn",
+        disabled: busy,
+        onClick: copyPng,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "copy",
+          s: 16
+        }), "Copy PNG"]
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: "btn",
+        disabled: busy,
+        onClick: () => dlRaster('image/webp', 'webp'),
+        children: "WebP"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+        className: "btn",
+        disabled: busy,
+        onClick: () => dlRaster('image/jpeg', 'jpg'),
+        children: "JPG"
+      }), asset.text !== undefined && asset.kind !== 'font' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+        className: "btn col-span-2",
+        onClick: copyChar,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+          n: "copy",
+          s: 16
+        }), "Copy as text ", asset.kind === 'emoji' ? 'emoji' : 'symbol']
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+      className: "flex items-center gap-2 text-xs",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        className: "muted font-medium",
+        children: "Export size"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("select", {
+        className: "field !py-1.5 !text-xs",
+        value: exportPx,
+        onChange: e => setExportPx(+e.target.value),
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("option", {
+          value: 0,
+          children: ["Current (", st.size, "px)"]
+        }), [64, 128, 256, 512, 1024, 2048, 4096].map(n => /*#__PURE__*/(0, _jsxRuntime.jsxs)("option", {
+          value: n,
+          children: [n, "px"]
+        }, n))]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Section, {
+      title: "Style presets",
+      icon: "wand",
+      open: true,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "grid grid-cols-4 gap-1.5",
+        children: PRESETS.map(p => /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+          onClick: () => p.name === 'Original' ? reset() : applyPreset(p.p),
+          className: "tile py-2 px-1 flex flex-col items-center gap-0.5 text-[11px] font-semibold",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "text-lg leading-none",
+            children: p.emoji
+          }), p.name]
+        }, p.name))
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Colour",
+      icon: "palette",
+      open: true,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+        value: st.colorMode,
+        onChange: v => patch({
+          colorMode: v
+        }),
+        options: [...(orig ? [{
+          id: 'original',
+          label: asset.color ? 'Brand colour' : 'Original'
+        }] : []), {
+          id: 'solid',
+          label: 'Solid'
+        }, {
+          id: 'gradient',
+          label: 'Gradient'
+        }]
+      }), st.colorMode === 'original' && orig && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("p", {
+          className: "text-xs muted",
+          children: [asset.color ? `Official brand colour ${asset.color.toUpperCase()}. ` : '', "Fine-tune with the shifts below or switch to Solid/Gradient to recolour."]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Hue shift",
+          value: st.hue,
+          min: -180,
+          max: 180,
+          onChange: v => patch({
+            hue: v
+          }),
+          unit: "\xB0"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Saturation",
+          value: st.sat,
+          min: 0,
+          max: 300,
+          onChange: v => patch({
+            sat: v
+          }),
+          unit: "%"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Brightness",
+          value: st.bright,
+          min: 20,
+          max: 200,
+          onChange: v => patch({
+            bright: v
+          }),
+          unit: "%"
+        })]
+      }), st.colorMode !== 'original' && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+          label: st.colorMode === 'gradient' ? 'Start colour' : 'Colour',
+          value: st.color,
+          onChange: v => patch({
+            color: v
+          })
+        }), st.colorMode === 'gradient' && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+            label: "End colour",
+            value: st.color2,
+            onChange: v => patch({
+              color2: v
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+            label: "Angle",
+            value: st.angle,
+            min: 0,
+            max: 360,
+            onChange: v => patch({
+              angle: v
+            }),
+            unit: "\xB0"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "flex flex-wrap gap-1.5",
+          children: SWATCHES.map(c => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            "aria-label": c,
+            onClick: () => patch({
+              color: c
+            }),
+            className: "w-6 h-6 rounded-full border border-black/25 cursor-pointer hover:scale-110 transition",
+            style: {
+              background: c
+            }
+          }, c))
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Texture",
+      icon: "layers",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "flex flex-wrap gap-1.5",
+        children: _render.TEXTURES.map(t => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+          className: `chip ${st.texture === t.id ? 'on' : ''}`,
+          onClick: () => patch({
+            texture: t.id
+          }),
+          children: t.label
+        }, t.id))
+      }), st.texture !== 'none' && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+          label: "Texture colour",
+          value: st.texColor,
+          onChange: v => patch({
+            texColor: v
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Scale",
+          value: st.texScale,
+          min: 0.3,
+          max: 5,
+          step: 0.1,
+          onChange: v => patch({
+            texScale: v
+          }),
+          unit: "\xD7"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Intensity",
+          value: st.texOpacity,
+          min: 0.05,
+          max: 1,
+          step: 0.05,
+          onChange: v => patch({
+            texOpacity: v
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+          className: "flex items-center gap-2 text-xs",
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "muted font-medium",
+            children: "Blend"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("select", {
+            className: "field !py-1.5 !text-xs",
+            value: st.texBlend,
+            onChange: e => patch({
+              texBlend: e.target.value
+            }),
+            children: ['normal', 'multiply', 'overlay', 'soft-light', 'hard-light', 'screen', 'color-burn', 'difference'].map(b => /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+              children: b
+            }, b))
+          })]
+        }), st.bgShape !== 'none' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+          value: st.texTarget,
+          onChange: v => patch({
+            texTarget: v
+          }),
+          options: [{
+            id: 'icon',
+            label: 'On icon'
+          }, {
+            id: 'bg',
+            label: 'On backdrop'
+          }, {
+            id: 'both',
+            label: 'Both'
+          }]
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Size & transform",
+      icon: "sliders",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Size",
+        value: st.size,
+        min: 16,
+        max: 1024,
+        onChange: v => patch({
+          size: v
+        }),
+        unit: "px"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Rotate",
+        value: st.rotate,
+        min: -180,
+        max: 180,
+        onChange: v => patch({
+          rotate: v
+        }),
+        unit: "\xB0"
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Opacity",
+        value: st.opacity,
+        min: 0.1,
+        max: 1,
+        step: 0.05,
+        onChange: v => patch({
+          opacity: v
+        })
+      }), asset.stroke && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Stroke width",
+        value: st.strokeWidth,
+        min: 0.25,
+        max: 3,
+        step: 0.05,
+        onChange: v => patch({
+          strokeWidth: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "flex gap-1.5",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Toggle, {
+          label: "Flip \u2194",
+          value: st.flipX,
+          onChange: v => patch({
+            flipX: v
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Toggle, {
+          label: "Flip \u2195",
+          value: st.flipY,
+          onChange: v => patch({
+            flipY: v
+          })
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Effects",
+      icon: "sparkles",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Sticker outline",
+        value: st.outlineW,
+        min: 0,
+        max: 48,
+        onChange: v => patch({
+          outlineW: v
+        })
+      }), st.outlineW > 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+        label: "Outline colour",
+        value: st.outlineColor,
+        onChange: v => patch({
+          outlineColor: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Shadow blur",
+        value: st.shadowBlur,
+        min: 0,
+        max: 30,
+        onChange: v => patch({
+          shadowBlur: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Shadow X",
+        value: st.shadowX,
+        min: -40,
+        max: 40,
+        onChange: v => patch({
+          shadowX: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Shadow Y",
+        value: st.shadowY,
+        min: -40,
+        max: 40,
+        onChange: v => patch({
+          shadowY: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Shadow strength",
+        value: st.shadowOpacity,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        onChange: v => patch({
+          shadowOpacity: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+        label: "Shadow colour",
+        value: st.shadowColor,
+        onChange: v => patch({
+          shadowColor: v
+        })
+      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+        label: "Glow",
+        value: st.glow,
+        min: 0,
+        max: 30,
+        onChange: v => patch({
+          glow: v
+        })
+      }), st.glow > 0 && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+        label: "Glow colour",
+        value: st.glowColor,
+        onChange: v => patch({
+          glowColor: v
+        })
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Backdrop shape",
+      icon: "shapes",
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+        value: st.bgShape,
+        onChange: v => patch({
+          bgShape: v
+        }),
+        options: ['none', 'circle', 'rounded', 'squircle', 'square', 'hexagon', 'burst'].map(s => ({
+          id: s,
+          label: s[0].toUpperCase() + s.slice(1)
+        }))
+      }), st.bgShape !== 'none' && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Seg, {
+          value: st.bgMode,
+          onChange: v => patch({
+            bgMode: v
+          }),
+          options: [{
+            id: 'solid',
+            label: 'Solid'
+          }, {
+            id: 'gradient',
+            label: 'Gradient'
+          }]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+          label: "Backdrop colour",
+          value: st.bgColor,
+          onChange: v => patch({
+            bgColor: v
+          })
+        }), st.bgMode === 'gradient' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.ColorRow, {
+          label: "Backdrop colour 2",
+          value: st.bgColor2,
+          onChange: v => patch({
+            bgColor2: v
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Padding",
+          value: st.bgPad,
+          min: 0,
+          max: 45,
+          onChange: v => patch({
+            bgPad: v
+          }),
+          unit: "%"
+        }), st.bgMode === 'gradient' && st.colorMode !== 'gradient' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Slider, {
+          label: "Gradient angle",
+          value: st.angle,
+          min: 0,
+          max: 360,
+          onChange: v => patch({
+            angle: v
+          }),
+          unit: "\xB0"
+        })]
+      })]
+    }), (editable || isText) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_ui.Section, {
+      title: "Text & font",
+      icon: "type",
+      open: editable,
+      children: [editable && /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+        className: "block text-xs",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          className: "muted font-medium",
+          children: "Your text"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("textarea", {
+          className: "field mt-1",
+          rows: 2,
+          value: st.text ?? (asset.gen ? asset.label ?? '' : asset.text ?? ''),
+          onChange: e => patch({
+            text: e.target.value
+          })
+        })]
+      }), asset.kind !== 'font' && !asset.gen && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "sec-title",
+          children: "Render with Google font"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "flex flex-wrap gap-1.5",
+          children: FONT_PICKS.map(f => /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            className: `chip ${st.fontFamily === f ? 'on' : ''}`,
+            onClick: () => patch({
+              fontFamily: f
+            }),
+            children: f || 'System'
+          }, f || 'sys'))
+        })]
+      }), asset.kind !== 'sticker' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "flex gap-1.5",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Toggle, {
+          label: "Bold",
+          value: st.bold,
+          onChange: v => patch({
+            bold: v
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Toggle, {
+          label: "Italic",
+          value: st.italic,
+          onChange: v => patch({
+            italic: v
+          })
+        })]
+      }), asset.kind === 'font' && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "flex gap-2 flex-wrap",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
+          className: "btn",
+          target: "_blank",
+          rel: "noreferrer",
+          href: `https://fonts.google.com/specimen/${encodeURIComponent(asset.font || '').replace(/%20/g, '+')}`,
+          children: "Get font \u2197"
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+          className: "btn",
+          onClick: () => {
+            navigator.clipboard.writeText(`@import url('https://fonts.googleapis.com/css2?family=${(asset.font || '').replace(/ /g, '+')}&display=swap');\nfont-family: '${asset.font}', sans-serif;`);
+            flash('CSS copied');
+          },
+          children: "Copy CSS"
+        })]
+      })]
+    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
+      className: "btn",
+      onClick: reset,
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_ui.Ico, {
+        n: "reset",
+        s: 16
+      }), "Reset all customisation"]
+    })]
+  });
+}
+};
+__r("src/main.tsx");</script></body></html>
